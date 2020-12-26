@@ -17,7 +17,7 @@ const Calendar: React.FC = () => {
 
   return (
     <section
-      aria-label="Calendar. Use the buttons inside to to select the day you wanna record your mood for."
+      aria-label="Calendar. Use the buttons inside to select the day you wanna record your mood for."
       className={['calendar', isPicking ? 'picking' : ''].join(' ')}
     >
       {days.map((mood, index) => {
