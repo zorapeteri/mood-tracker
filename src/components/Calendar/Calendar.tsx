@@ -10,18 +10,36 @@ const Calendar: React.FC = () => {
     date.getMonth() === new Date().getMonth() && date.getDate() === index + 1;
 
   return (
-    <section className={['calendar', isPicking ? 'picking' : ''].join(' ')}>
-      {days.map((mood, index) => (
-        <button
-          key={index}
-          type="button"
-          className={['day', isToday(index) ? 'today' : ''].join(' ')}
-          onClick={() => pickDay(index)}
-          style={{ backgroundColor: (moods as any)[mood] }}
-        >
-          {index + 1}
-        </button>
-      ))}
+    <section
+      aria-label="Calendar. Use the buttons inside to to select the day you wanna record your mood for."
+      className={['calendar', isPicking ? 'picking' : ''].join(' ')}
+    >
+      {days.map((mood, index) => {
+        const dayTitle = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          index + 1,
+        ).toLocaleDateString(undefined, {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+        return (
+          <button
+            key={index}
+            type="button"
+            aria-label={dayTitle}
+            title={dayTitle}
+            className={['day', isToday(index) ? 'today' : ''].join(' ')}
+            onClick={() => pickDay(index)}
+            style={{ backgroundColor: (moods as any)[mood] }}
+          >
+            {index + 1}
+          </button>
+        );
+      })}
       <span className="pick-a-mood">Pick a mood</span>
     </section>
   );

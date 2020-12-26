@@ -7,7 +7,10 @@ const MoodPicker: React.FC = () => {
   const { isPicking, pickMood } = useContext(MoodContext);
 
   return (
-    <section className={['mood-picker', isPicking ? 'picking' : ''].join(' ')}>
+    <section
+      aria-label="mood picker"
+      className={['mood-picker', isPicking ? 'picking' : ''].join(' ')}
+    >
       {Object.keys(moods).map(
         (mood) =>
           (mood !== 'none' || isPicking) && (

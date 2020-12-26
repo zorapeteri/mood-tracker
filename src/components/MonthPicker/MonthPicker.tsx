@@ -15,12 +15,18 @@ const MonthPicker: React.FC = () => {
       <button
         type="button"
         title="Previous month"
+        aria-label="Previous month"
         onClick={() => previousMonth()}
       >
         ◀
       </button>
       <span>{monthAndYear(date)}</span>
-      <button type="button" title="Next month" onClick={() => nextMonth()}>
+      <button
+        type="button"
+        title="Next month"
+        aria-label="Next month"
+        onClick={() => nextMonth()}
+      >
         ▶
       </button>
     </section>
