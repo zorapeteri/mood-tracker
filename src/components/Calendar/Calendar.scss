@@ -1,0 +1,48 @@
+$blue: #0090ff;
+
+.calendar {
+  transition: all 0.2s ease-out;
+  position: relative;
+
+  .pick-a-mood {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    font-size: 1.2em;
+  }
+
+  &.picking {
+    pointer-events: none;
+
+    .pick-a-mood {
+      display: flex;
+      background-color: rgba(white, 0.9);
+    }
+  }
+
+  .day {
+    appearance: none;
+    background-color: transparent;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.4em;
+    height: 3.4em;
+    border: 1px solid black;
+    margin: 0.3em;
+    cursor: pointer;
+    outline: none;
+
+    &.today,
+    &:hover,
+    &:focus-visible {
+      border: 2px solid black;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.mood-picker {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  pointer-events: none;
+  padding: 10px;
+
+  &.picking {
+    pointer-events: all;
+  }
+
+  .mood {
+    margin: 0px 0.7em 1em 0;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: flex-end;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s ease-out;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+
+    &-color {
+      height: 1.2em;
+      width: 1.2em;
+      margin-right: 10px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: rgba(blue, 0.1);
+    }
+  }
+}
