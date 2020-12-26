@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { MoodContext } from '../../context/MoodContext';
 import moods from '../../moods';
 import './Calendar.scss';
 
 const Calendar: React.FC = () => {
-  const { isPicking, days, date, pickDay } = useContext(MoodContext);
+  const { isPicking, days, date, pickDay, cancel } = useContext(MoodContext);
 
   const isToday = (index: number) =>
     date.getMonth() === new Date().getMonth() && date.getDate() === index + 1;
+
+  useEffect(() => {
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') cancel();
+    });
+  }, []);
 
   return (
     <section

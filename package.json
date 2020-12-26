@@ -45,6 +45,7 @@
       "no-unused-vars": "warn",
       "react/no-array-index-key": "warn",
       "react/prop-types": "off",
+      "react-hooks/exhaustive-deps": "off",
       "object-curly-newline": "off",
       "implicit-arrow-linebreak": "off",
       "operator-linebreak": "off",
