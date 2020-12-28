@@ -20,7 +20,7 @@ const Calendar: React.FC = () => {
       aria-label="Calendar. Use the buttons inside to select the day you wanna record your mood for."
       className={['calendar', isPicking ? 'picking' : ''].join(' ')}
     >
-      <ol className="days">
+      <ol className="days" data-testid="days">
         {days.map((mood, index) => {
           const dayTitle = new Date(
             date.getFullYear(),
