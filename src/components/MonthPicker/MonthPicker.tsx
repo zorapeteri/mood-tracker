@@ -13,6 +13,7 @@ const MonthPicker: React.FC = () => {
   return (
     <section className="month-picker">
       <button
+        data-testid="previousMonth"
         type="button"
         title="Previous month"
         aria-label="Previous month"
@@ -20,8 +21,9 @@ const MonthPicker: React.FC = () => {
       >
         ◀
       </button>
-      <span>{monthAndYear(date)}</span>
+      <span data-testid="date">{monthAndYear(date)}</span>
       <button
+        data-testid="nextMonth"
         type="button"
         title="Next month"
         aria-label="Next month"
