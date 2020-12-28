@@ -20,32 +20,34 @@ const Calendar: React.FC = () => {
       aria-label="Calendar. Use the buttons inside to select the day you wanna record your mood for."
       className={['calendar', isPicking ? 'picking' : ''].join(' ')}
     >
-      {days.map((mood, index) => {
-        const dayTitle = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          index + 1,
-        ).toLocaleDateString(undefined, {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
+      <ol className="days">
+        {days.map((mood, index) => {
+          const dayTitle = new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            index + 1,
+          ).toLocaleDateString(undefined, {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          });
 
-        return (
-          <button
-            key={index}
-            type="button"
-            aria-label={dayTitle}
-            title={dayTitle}
-            className={['day', isToday(index) ? 'today' : ''].join(' ')}
-            onClick={() => pickDay(index)}
-            style={{ backgroundColor: (moods as any)[mood] }}
-          >
-            {index + 1}
-          </button>
-        );
-      })}
+          return (
+            <button
+              key={index}
+              type="button"
+              aria-label={dayTitle}
+              title={dayTitle}
+              className={['day', isToday(index) ? 'today' : ''].join(' ')}
+              onClick={() => pickDay(index)}
+              style={{ backgroundColor: (moods as any)[mood] }}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
+      </ol>
       <span className="pick-a-mood">Pick a mood</span>
     </section>
   );
