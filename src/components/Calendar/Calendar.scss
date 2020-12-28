@@ -1,8 +1,10 @@
 $blue: #0090ff;
+$button-size: 3.4em;
 
 .calendar {
   transition: all 0.2s ease-out;
   position: relative;
+  width: 100%;
 
   .pick-a-mood {
     position: absolute;
@@ -27,6 +29,9 @@ $blue: #0090ff;
   }
 
   .days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, $button-size);
+    place-content: center;
     padding: 0;
   }
 
@@ -36,8 +41,8 @@ $blue: #0090ff;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 3.4em;
-    height: 3.4em;
+    width: $button-size;
+    height: $button-size;
     border: 1px solid black;
     margin: 0.3em;
     cursor: pointer;
