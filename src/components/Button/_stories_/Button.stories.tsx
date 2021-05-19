@@ -5,6 +5,8 @@ import '../../../index.scss';
 
 import Button from '../';
 
+import { IoAdd } from 'react-icons/io5';
+
 const stories = storiesOf('Button', module);
 
 stories.add('Primary', () => {
@@ -32,6 +34,9 @@ stories.add('Disabled', () => {
 });
 
 stories.add('Circular', () => {
-  // TODO add icon
-  return <Button color="secondary" fontSize="1em" padding="0" circular />;
+  return (
+    <Button color="secondary" fontSize="1em" padding="0" circular>
+      <IoAdd />
+    </Button>
+  );
 });
