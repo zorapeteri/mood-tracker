@@ -1,0 +1,46 @@
+@import '../../variables.scss';
+
+button {
+  box-shadow: 0px 4px 8px #2C273814;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s linear;
+}
+
+.primary {
+  background-color: $color-accent;
+  color: $color-white;
+
+  &:hover {
+    background-color: darken($color-accent, 5%);
+  }
+}
+
+.secondary {
+  background-color: $color-white;
+  color: $color-muted;
+  font-weight: 600;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.disabled {
+  background-color: $color-shade;
+  color: #B1B5BF;
+  cursor: not-allowed;
+
+  &:hover {
+    color: darken(#B1B5BF, 15%);
+  }
+}
+
+.circular {
+  border-radius: 50%;
+  height: 31px;
+  width: 31px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
