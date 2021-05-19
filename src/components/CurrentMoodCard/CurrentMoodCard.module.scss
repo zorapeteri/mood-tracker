@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+
+.currentMoodCard {
+  background-color: $color-white;
+  color: $color-primary;
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  display: grid;
+  row-gap: 0.8em;
+  box-shadow: 0px 24px 48px #2C27380A;
+
+  & > span {
+    font-size: 16px;
+  }
+
+  .mood {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      height: 3em;
+      margin-right: 10px;
+    }
+
+    span {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
