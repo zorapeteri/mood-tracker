@@ -1,0 +1,36 @@
+@import '../../variables.scss';
+
+.viewToggle {
+  background-color: $color-accent;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 50px;
+  width: 100%;
+
+  button {
+    width: 50%;
+    padding: 5px 0;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .activeToggle {
+    background-color: $color-white;
+    color: $color-accent;
+  }
+  
+  button:not(.activeToggle) {
+    background-color: transparent;
+    color: inherit;
+    transition: all 0.2s linear;
+  
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
