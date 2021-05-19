@@ -1,1 +1,1 @@
-import { default } from './CurrentMoodCard';
+export { default } from './CurrentMoodCard';
