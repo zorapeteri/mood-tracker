@@ -1,0 +1,108 @@
+@import '../../variables.scss';
+
+.noteCard {
+  background-color: $color-white;
+  color: $color-primary;
+  position: relative;
+  padding: 10px 15px 20px;
+  border-radius: 20px;
+  transition: all 0.2s linear;
+  box-shadow: 0px 32px 64px #2C273814;
+  cursor: pointer;
+
+  .time {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .note {
+    margin: 5px 0 0 5px;
+    font-size: 12px;
+  }
+
+  .desktopDeleteContainer,
+  .handheldDeleteOverlay {
+    display: none;
+  }
+
+  &:hover {
+    transform: scale(1.01);
+
+    @media #{$large} {
+      .desktopDeleteContainer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: transparent;
+        width: 50px;
+  
+        .desktopDeleteButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          padding: 3px;
+          font-size: 1em;
+          color: #2c2738;
+          background-color: #dbe2ea;
+          height: 2em;
+          width: 2em;
+          transition: all 0.2s linear;
+    
+          &:hover {
+            transform: rotate(360deg);
+            color: $color-white;
+            background-color: $color-error;
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$small, $medium} {
+    &.longPressed {
+      animation: bump 0.2s ease-in-out;
+      overflow: hidden;
+    }
+
+    .handheldDeleteOverlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+  
+      .handheldDeleteOverlayBlock {
+        background-color: $color-white;
+        opacity: 0.5;
+      }
+  
+      .handheldDeleteButton {
+        background-color: $color-error;
+        color: $color-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0;
+        font-size: 1.4em;
+  
+        &:hover {
+          background-color: darken($color-error, 10%);
+        }
+      }
+    }
+  }
+}
+
+@keyframes bump {
+  50% {
+    transform: scale(1.02);
+  }
+}
