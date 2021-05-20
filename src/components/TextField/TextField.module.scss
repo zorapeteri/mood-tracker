@@ -1,0 +1,27 @@
+@import '../../variables.scss';
+
+.textField {
+  textarea {
+    box-shadow: 0px 4px 8px #2C27380A;
+    border: 1px solid $color-shade;
+    color: $color-primary;
+    font-size: 16px;
+    &::placeholder {
+      color: $color-muted;
+    }
+    padding: 15px;
+    outline: none;
+    border-radius: 10px;
+    width: 100%;
+    resize: none;
+
+    &:focus {
+      border-color: darken($color-shade, 20%);
+    }
+  }
+
+  small {
+    color: $color-error;
+    margin-left: 10px;
+  }
+}
