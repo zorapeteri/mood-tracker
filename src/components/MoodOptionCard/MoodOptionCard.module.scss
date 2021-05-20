@@ -1,0 +1,17 @@
+@import '../../variables.scss';
+
+.moodOptionCard {
+  color: $color-primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 2em;
+    margin-right: 1.2em;
+  }
+
+  span {
+    text-transform: capitalize;
+  }
+}
