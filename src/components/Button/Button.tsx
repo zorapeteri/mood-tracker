@@ -8,16 +8,19 @@ type ButtonProps = {
   padding: string;
   ariaLabel?: string;
   circular?: boolean;
+  className?: string;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
-  const { children, color, fontSize, padding, ariaLabel, circular } = props;
+  const { children, color, fontSize, padding, ariaLabel, circular, className, onClick } = props;
 
   return (
     <button
       aria-label={ariaLabel}
-      className={circular ? [style[color], style.circular].join(' ') : style[color]}
+      className={`${style[color]} ${circular && style.circular} ${className}`}
       style={{ fontSize, padding }}
+      onClick={onClick}
     >
       {children}
     </button>
