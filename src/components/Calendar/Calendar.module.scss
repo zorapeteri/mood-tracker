@@ -1,0 +1,96 @@
+@import '../../variables.scss';
+
+.calendar {
+  background-color: $color-white;
+  padding: 20px 20px 45px;
+  border-radius: 20px;
+  width: fit-content;
+  min-width: 250px;
+
+  .monthPicker {
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin: 2px 10px 0;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: transparent;
+      transition: all 0.2s linear;
+      border: none;
+      box-shadow: none;
+
+      &:hover, &:focus-visible {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .daysOfTheWeek {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    opacity: 0.5;
+    place-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 12px;
+    width: 100%;
+    place-items: center;
+    margin-top: 20px;
+    font-weight: 600;
+    
+    button {
+      font-size: 11px;
+      box-shadow: none;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2em;
+      height: 2em;
+      background-color: transparent;
+      transition: all 0.2s linear;
+
+      &:hover {
+        background-color: lighten($color-accent, 50%);
+      }
+    }
+
+    .notThisMonth {
+      color: $color-shade;
+
+      &:hover {
+        background-color: $color-shade;
+        color: $color-white;
+      }
+    }
+
+    .unavailable {
+      color: $color-muted;
+      pointer-events: none;
+    }
+
+    .today {
+      background-color: $color-shade;
+    }
+
+    .selected {
+      background-color: $color-accent;
+      color: $color-white;
+
+      &:hover {
+        background-color: $color-accent;
+      }
+    }
+  }
+}
