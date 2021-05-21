@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import '../../../index.scss';
 
-import Modal from '../Modal';
+import Modal from '../';
 
 const stories = storiesOf('Modal', module);
 
