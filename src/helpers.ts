@@ -99,7 +99,7 @@ export const saveNote = (note: Note) => {
 export const deleteNote = (date: Date, id: string) => {
   const day = getDataForDay(date);
   ls.set(
-    format(day),
+    format(date),
     JSON.stringify({
       ...day,
       notes: day.notes.filter((note: Note) => note.id !== id),
