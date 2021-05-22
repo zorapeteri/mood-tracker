@@ -1,6 +1,6 @@
 import { SyntheticEvent, useCallback, useRef, useState } from 'react';
 
-const useLongPress = (onLongPress: () => void, onClick: () => void = () => {}, { shouldPreventDefault = true, delay = 300 } = {}) => {
+const useLongPress = (onLongPress: () => void, onClick: () => void = () => {}, { shouldPreventDefault = false, delay = 300 } = {}) => {
   const [longPressTriggered, setLongPressTriggered] = useState(false);
   const timeout = useRef<NodeJS.Timeout>();
   const target = useRef<HTMLElement>();
