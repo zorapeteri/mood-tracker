@@ -14,7 +14,7 @@ type MoodLog = {
 };
 
 type Note = {
-  id?: string;
+  id: string;
   time: Date;
   text: string;
 };
