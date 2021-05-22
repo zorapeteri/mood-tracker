@@ -5,28 +5,47 @@ import useLongPress from '../../hooks/useLongPress';
 import ClampLines from 'react-clamp-lines';
 
 import { IoClose, IoTrashOutline } from 'react-icons/io5';
+import { format } from 'date-fns';
 
 type NoteCardProps = {
-  time: string;
-  note: string;
+  id: string;
+  time: Date;
+  text: string;
+  onDelete: (id: string) => void;
   width?: string;
 };
 
 const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) => {
-  const { time, note, width } = props;
+  const { id, time, text, onDelete, width } = props;
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
-  const longPress = { ...useLongPress(() => setLongPressed(true)), onBlur: () => setLongPressed(false) };
+  const setupListener = () => {
+    const listener = (e: MouseEvent) => {
+      console.log(e.target);
+      if (!(e.target as HTMLElement).matches(`.${style.handheldDeleteOverlay} *`)) {
+        setLongPressed(false);
+        document.removeEventListener('click', listener);
+      }
+    };
+    document.addEventListener('click', listener);
+  };
+
+  const longPress = {
+    ...useLongPress(() => {
+      setLongPressed(true);
+      setupListener();
+    }),
+  };
 
   return (
     <div className={`${style.noteCard} ${isLongPressed && style.longPressed}`} style={{ maxWidth: width }} tabIndex={0} {...longPress}>
-      <span className={style.time}>{time}</span>
-      <ClampLines id="note" text={note} className={style.note} buttons={false} />
+      <span className={style.time}>{format(time, 'hh:mm a')}</span>
+      <ClampLines id="note" text={text} className={style.note} buttons={false} />
       {isLongPressed && (
         <div className={style.handheldDeleteOverlay}>
           <div className={style.handheldDeleteOverlayBlock}></div>
-          <button className={style.handheldDeleteButton} title="delete this note">
+          <button className={style.handheldDeleteButton} title="delete this note" onClick={() => onDelete(id)}>
             <IoClose />
           </button>
         </div>
