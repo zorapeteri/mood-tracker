@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import '../../../index.scss';
+import '../../../scss/index.scss';
 
 import NoteCard from '../NoteCard';
 

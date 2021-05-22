@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import '../../../index.scss';
+import '../../../scss/index.scss';
 
 import Calendar from '../Calendar';
 
