@@ -91,7 +91,7 @@ export const saveNote = (note: Note) => {
     format(note.time),
     JSON.stringify({
       ...day,
-      notes: note.id ? day.notes.map((n: Note) => (n.id === note.id ? note : n)) : [...day.notes, { id: uuid(), ...note }],
+      notes: note.id ? day.notes.map((n: Note) => (n.id === note.id ? note : n)) : [...day.notes, { ...note, id: uuid() }],
     }),
   );
 };
