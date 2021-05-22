@@ -1,5 +1,6 @@
 import { format as formatDate, startOfMonth, isSameMonth, addDays } from 'date-fns';
 import { v4 as uuid } from 'uuid';
+import dateParser from './dateParser';
 
 const format = (date: Date) => formatDate(date, 'yyyy/MM/dd');
 
@@ -8,6 +9,10 @@ const ls = {
   set: localStorage.setItem.bind(localStorage),
   remove: localStorage.removeItem.bind(localStorage),
   clear: localStorage.clear.bind(localStorage),
+};
+
+export const isMood = (value: any): value is Mood => {
+  return [1, 2, 3, 4, 5].includes(value);
 };
 
 export const getUserPreferences = () => {
@@ -34,7 +39,7 @@ export const getDaysAvailableInMonth = (month: Date) => {
 
 export const getDataForDay = (day: Date = new Date()) => {
   const stored = ls.get(format(day));
-  if (stored) return JSON.parse(stored);
+  if (stored) return JSON.parse(stored, dateParser);
   return { moodLog: [], notes: [] };
 };
 
@@ -62,7 +67,7 @@ export const saveMoodLog = (mood: Mood) => {
 export const deleteMoodLog = (date: Date, id: string) => {
   const day = getDataForDay(date);
   ls.set(
-    format(day),
+    format(date),
     JSON.stringify({
       ...day,
       moodLog: day.moodLog.filter((log: MoodLog) => log.id !== id),
@@ -73,7 +78,10 @@ export const deleteMoodLog = (date: Date, id: string) => {
 
 export const getLatestMood = () => {
   const latestMood = ls.get('latestMood');
-  return latestMood && parseInt(latestMood);
+  if (latestMood === null) return latestMood;
+  const parsed = parseInt(latestMood);
+  if (isMood(parsed)) return parsed;
+  return null;
 };
 
 export const saveNote = (note: Note) => {
