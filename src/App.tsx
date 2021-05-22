@@ -28,7 +28,7 @@ function App() {
       {currentMood ? (
         <CurrentMoodCard currentMood={currentMood} />
       ) : (
-        <Button color="secondary" fontSize="1em" padding="1em 2em">
+        <Button color="secondary" fontSize="1em" padding="1em 2em" className={style.recordYourMoodButton}>
           Record your mood
         </Button>
       )}
