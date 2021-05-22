@@ -1,3 +1,4 @@
+import { notStrictEqual } from 'assert';
 import { format as formatDate, startOfMonth, isSameMonth, addDays } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 import dateParser from './dateParser';
@@ -90,12 +91,7 @@ export const saveNote = (note: Note) => {
     format(note.time),
     JSON.stringify({
       ...day,
-      notes: note.id
-        ? day.notes.map((n: Note) => (n.id === note.id ? note : n))
-        : {
-            id: uuid(),
-            ...note,
-          },
+      notes: note.id ? day.notes.map((n: Note) => (n.id === note.id ? note : n)) : [...day.notes, { id: uuid(), ...note }],
     }),
   );
 };
