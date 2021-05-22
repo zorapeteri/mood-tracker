@@ -74,7 +74,11 @@ export const deleteMoodLog = (date: Date, id: string) => {
       moodLog: day.moodLog.filter((log: MoodLog) => log.id !== id),
     }),
   );
-  if (id === ls.get('latestMood_id')) ls.remove('latestMood');
+  if (id === ls.get('latestMood_id')) {
+    ls.remove('latestMood');
+    return true;
+  }
+  return false;
 };
 
 export const getLatestMood = () => {

@@ -41,8 +41,9 @@ function App() {
                 {...log}
                 key={log.id}
                 onDelete={(id) => {
-                  deleteMoodLog(date, id);
+                  const isLatest = deleteMoodLog(date, id);
                   setMoodLog(getDataForDay(date).moodLog);
+                  if (isLatest) setCurrentMood(null);
                 }}
               />
             ))
