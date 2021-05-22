@@ -12,7 +12,7 @@ function App() {
 
   const { name, startsOnSunday } = getUserPreferences();
 
-  const [activeToggle, setActiveToggle] = useState<'today' | 'calendar'>('today');
+  const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [date, setDate] = useState<Date>(new Date());
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay(date).moodLog);
@@ -24,7 +24,7 @@ function App() {
         <IoMenu />
       </button>
       <h1 className={style.greeting}>Hi {name}!</h1>
-      <ViewToggle activeToggle={activeToggle} onChange={(option) => setActiveToggle(option)} />
+      <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} />
       {currentMood ? (
         <CurrentMoodCard currentMood={currentMood} />
       ) : (
