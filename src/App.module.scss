@@ -1,0 +1,46 @@
+@import './scss/variables.scss';
+
+.app {
+  padding: 60px 30px 100px;
+  position: relative;
+  display: grid;
+  row-gap: 20px;
+}
+
+.hamburgerMenu {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background-color: transparent;
+  font-size: 1.6em;
+  box-shadow: none;
+}
+
+h1 {
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.listContainer {
+  margin: 20px 0 0;
+  display: grid;
+  row-gap: 13px;
+}
+
+.listIsEmpty {
+  color: $color-muted;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.notesHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
