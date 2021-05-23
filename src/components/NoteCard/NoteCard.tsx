@@ -22,7 +22,6 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
 
   const setupListener = () => {
     const listener = (e: MouseEvent) => {
-      console.log(e.target);
       if (!(e.target as HTMLElement).matches(`.${style.handheldDeleteOverlay} *`)) {
         setLongPressed(false);
         document.removeEventListener('click', listener);
