@@ -23,6 +23,7 @@ type CalendarProps = {
   startsOnSunday: boolean;
   onMonthViewChange: (direction: 1 | -1) => void;
   onChange: (date: Date) => void;
+  className?: string;
 };
 
 const getDaysNeededFromPreviousMonth = (date: Date, startsOnSunday: boolean) => {
@@ -51,7 +52,7 @@ const getDaysNeededFromNextMonth = (date: Date, startsOnSunday: boolean) => {
 };
 
 const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) => {
-  const { month, date, daysWithData, startsOnSunday, onMonthViewChange, onChange } = props;
+  const { month, date, daysWithData, startsOnSunday, onMonthViewChange, onChange, className } = props;
 
   const days = Array(getDaysInMonth(month))
     .fill(1)
@@ -61,7 +62,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
   const daysOfTheWeek = startsOnSunday ? ['S', 'M', 'T', 'W', 'T', 'F', 'S'] : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   return (
-    <div className={style.calendar}>
+    <div className={`${style.calendar} ${className}`}>
       <div className={style.monthPicker}>
         <button title="previous month" onClick={() => onMonthViewChange(-1)}>
           <IoChevronBack />

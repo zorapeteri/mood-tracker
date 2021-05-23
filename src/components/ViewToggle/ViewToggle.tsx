@@ -6,16 +6,16 @@ export type ViewToggleOption = 'today' | 'calendar';
 type ViewToggleProps = {
   activeToggle: ViewToggleOption;
   onChange: (option: ViewToggleOption) => void;
-  width?: string;
+  className?: string;
 };
 
 const ViewToggle: React.FunctionComponent<ViewToggleProps> = (props: ViewToggleProps) => {
-  const { activeToggle, onChange, width } = props;
+  const { activeToggle, onChange, className } = props;
 
   const toggleOptions: ViewToggleOption[] = ['today', 'calendar'];
 
   return (
-    <div className={style.viewToggle} style={{ maxWidth: width }}>
+    <div className={`${style.viewToggle} ${className}`}>
       {toggleOptions.map((option) => [
         <button
           key={option}

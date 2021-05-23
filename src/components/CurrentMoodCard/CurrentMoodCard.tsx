@@ -5,14 +5,14 @@ import Button from '../Button';
 
 type CurrentMoodCardProps = {
   currentMood: Mood;
-  width?: string;
+  className?: string;
 };
 
 const CurrentMoodCard: React.FunctionComponent<CurrentMoodCardProps> = (props: CurrentMoodCardProps) => {
-  const { currentMood, width } = props;
+  const { currentMood, className } = props;
 
   return (
-    <div className={style.currentMoodCard} style={{ maxWidth: width }}>
+    <div className={`${style.currentMoodCard} ${className}`}>
       <span>Your mood is</span>
       <div className={style.mood}>
         <img src={`${process.env.PUBLIC_URL}/assets/moods/${currentMood}.png`} alt={`${moodNames[currentMood]} mood emoji icon`} />

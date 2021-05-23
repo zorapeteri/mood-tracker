@@ -11,11 +11,11 @@ type MoodLogItemProps = {
   mood: Mood;
   time: Date;
   onDelete: (id: string) => void;
-  width?: string;
+  className?: string;
 };
 
 const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogItemProps) => {
-  const { id, mood, time, onDelete, width } = props;
+  const { id, mood, time, onDelete, className } = props;
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
@@ -32,17 +32,13 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
   const longPress = { ...useLongPress(() => { setLongPressed(true); setupListener(); }) };
 
   return (
-    <div className={`${style.moodLogItem} ${isLongPressed && style.longPressed}`} style={{ maxWidth: width }} {...longPress}>
+    <div className={`${style.moodLogItem} ${isLongPressed && style.longPressed} ${className}`} {...longPress}>
       <img src={`${process.env.PUBLIC_URL}/assets/moods/${mood}.png`} alt={`${moodNames[mood]} mood emoji icon`} />
       <span>{format(time, 'hh:mm a')}</span>
       {isLongPressed && (
         <div className={style.handheldDeleteOverlay}>
           <div className={style.handheldDeleteOverlayBlock}></div>
-          <button
-            className={style.handheldDeleteButton}
-            title="delete this mood log item"
-            onClick={() => onDelete(id)}
-          >
+          <button className={style.handheldDeleteButton} title="delete this mood log item" onClick={() => onDelete(id)}>
             <IoClose />
           </button>
         </div>

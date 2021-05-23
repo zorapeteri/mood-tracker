@@ -9,13 +9,14 @@ type ModalProps = {
   hideCloseButton?: boolean;
   buttonText: string;
   onButtonClick: () => void;
+  className?: string;
 };
 
 const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
-  const { children, title, hideCloseButton, buttonText, onButtonClick } = props;
+  const { children, title, hideCloseButton, buttonText, onButtonClick, className } = props;
 
   return (
-    <div className={style.modal}>
+    <div className={`${style.modal} ${className}`}>
       <h2>{title}</h2>
       <div className={style.body}>{children}</div>
 
