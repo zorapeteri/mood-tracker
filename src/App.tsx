@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoAdd, IoMenu } from 'react-icons/io5';
 import style from './App.module.scss';
 import Button from './components/Button';
@@ -19,6 +19,16 @@ function App() {
   const [date, setDate] = useState<Date>(new Date());
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay(date).moodLog);
   const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
+
+  useEffect(() => {
+    setMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+    setMoodLog(getDataForDay(date).moodLog);
+    setNotes(getDataForDay(date).notes);
+  }, [date]);
+
+  useEffect(() => {
+    if (activeView === 'today') setDate(new Date());
+  }, [activeView]);
 
   return (
     <div className={style.app}>
@@ -81,7 +91,6 @@ function App() {
                 key={note.id}
                 {...note}
                 onDelete={(id) => {
-                  console.log(getDataForDay(date));
                   deleteNote(date, id);
                   setNotes(getDataForDay(date).notes);
                 }}
