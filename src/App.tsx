@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { IoAdd, IoMenu } from 'react-icons/io5';
 import style from './App.module.scss';
 import Button from './components/Button';
+import Calendar from './components/Calendar';
 import CurrentMoodCard from './components/CurrentMoodCard';
 import MoodLogItem from './components/MoodLogItem';
 import NoteCard from './components/NoteCard';
 import ViewToggle from './components/ViewToggle';
-import { deleteMoodLog, deleteNote, getDataForDay, getLatestMood, getUserPreferences } from './helpers';
+import { deleteMoodLog, deleteNote, getDataForDay, getDaysAvailableInMonth, getLatestMood, getUserPreferences } from './helpers';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
+  const [month, setMonth] = useState<Date>(new Date());
   const [date, setDate] = useState<Date>(new Date());
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay(date).moodLog);
   const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
@@ -25,15 +27,28 @@ function App() {
       </button>
       <h1 className={style.greeting}>Hi {name}!</h1>
       <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} />
-      {currentMood ? (
-        <CurrentMoodCard currentMood={currentMood} />
+      {activeView === 'today' ? (
+        currentMood ? (
+          <CurrentMoodCard currentMood={currentMood} />
+        ) : (
+          <Button color="secondary" fontSize="1em" padding="1em 2em" className={style.recordYourMoodButton}>
+            Record your mood
+          </Button>
+        )
       ) : (
-        <Button color="secondary" fontSize="1em" padding="1em 2em" className={style.recordYourMoodButton}>
-          Record your mood
-        </Button>
+        <Calendar
+          month={month}
+          date={date}
+          startsOnSunday={startsOnSunday}
+          daysWithData={getDaysAvailableInMonth(month)}
+          onChange={(date) => setDate(date)}
+          onMonthViewChange={(direction) => {
+            setMonth(new Date(month.getFullYear(), month.getMonth() + direction, 1));
+          }}
+        />
       )}
       <section className={style.moodLog}>
-        <h2>Today's mood log</h2>
+        <h2>{activeView === 'today' ? "Today's mood log" : 'Mood log'}</h2>
         <div className={style.listContainer}>
           {moodLog.length ? (
             moodLog.map((log: MoodLog) => (
@@ -54,7 +69,7 @@ function App() {
       </section>
       <section className={style.notes}>
         <div className={style.notesHeaderContainer}>
-          <h2>Notes for today</h2>
+          <h2>{activeView === 'today' ? 'Notes for today' : 'Notes'}</h2>
           <Button color="secondary" circular={true} fontSize="20px" padding="0">
             <IoAdd />
           </Button>
