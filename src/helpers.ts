@@ -1,4 +1,3 @@
-import { notStrictEqual } from 'assert';
 import { format as formatDate, startOfMonth, isSameMonth, addDays } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 import dateParser from './dateParser';
