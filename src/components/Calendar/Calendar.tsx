@@ -72,13 +72,15 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
         </button>
       </div>
       <div className={style.daysOfTheWeek}>
-        {daysOfTheWeek.map((day) => (
-          <span>{day}</span>
+        {daysOfTheWeek.map((day, index) => (
+          <span key={index}>{day}</span>
         ))}
       </div>
       <div className={style.days}>
         {getDaysNeededFromPreviousMonth(month, startsOnSunday).map((day) => (
-          <button className={style.notThisMonth}>{day.getDate()}</button>
+          <button key={day.toString()} className={style.notThisMonth}>
+            {day.getDate()}
+          </button>
         ))}
         {days.map((day) => {
           const className = [
@@ -87,13 +89,15 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
             isToday(day) ? style.today : undefined,
           ].join(' ');
           return (
-            <button className={className} onClick={() => onChange(day)}>
+            <button key={day.toString()} className={className} onClick={() => onChange(day)}>
               {day.getDate()}
             </button>
           );
         })}
         {getDaysNeededFromNextMonth(month, startsOnSunday).map((day) => (
-          <button className={style.notThisMonth}>{day.getDate()}</button>
+          <button key={day.toString()} className={style.notThisMonth}>
+            {day.getDate()}
+          </button>
         ))}
       </div>
     </div>
