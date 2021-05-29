@@ -56,52 +56,52 @@ function App() {
         }}
         className={style.calendar}
       />
-      <div className={style.sectionsContainer}>
-        <section className={style.moodLog}>
-          <h2 className={style.moodLogHeader}>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
-          <div className={style.listContainer}>
-            {moodLog.length ? (
-              moodLog.map((log: MoodLog) => (
-                <MoodLogItem
-                  {...log}
-                  key={log.id}
-                  onDelete={(id) => {
-                    const isLatest = deleteMoodLog(date, id);
-                    setMoodLog(getDataForDay(date).moodLog);
-                    if (isLatest) setCurrentMood(null);
-                  }}
-                />
-              ))
-            ) : (
-              <p className={style.listIsEmpty}>There's nothing here so far...</p>
-            )}
-          </div>
-        </section>
-        <section className={style.notes}>
-          <div className={style.notesHeaderContainer}>
-            <h2>{isToday(date) ? 'Notes for today' : 'Notes'}</h2>
+      <section className={style.moodLog}>
+        <h2 className={style.moodLogHeader}>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
+        <div className={style.listContainer}>
+          {moodLog.length ? (
+            moodLog.map((log: MoodLog) => (
+              <MoodLogItem
+                {...log}
+                key={log.id}
+                onDelete={(id) => {
+                  const isLatest = deleteMoodLog(date, id);
+                  setMoodLog(getDataForDay(date).moodLog);
+                  if (isLatest) setCurrentMood(null);
+                }}
+              />
+            ))
+          ) : (
+            <p className={style.listIsEmpty}>There's nothing here so far...</p>
+          )}
+        </div>
+      </section>
+      <section className={style.notes}>
+        <div className={style.notesHeaderContainer}>
+          <h2>
+            {isToday(date) ? 'Notes for today' : 'Notes'}
             <Button color="secondary" circular={true} fontSize="20px" padding="0">
               <IoAdd />
             </Button>
-          </div>
-          <div className={style.listContainer}>
-            {notes.length ? (
-              notes.map((note: Note) => (
-                <NoteCard
-                  key={note.id}
-                  {...note}
-                  onDelete={(id) => {
-                    deleteNote(date, id);
-                    setNotes(getDataForDay(date).notes);
-                  }}
-                />
-              ))
-            ) : (
-              <p className={style.listIsEmpty}>There's nothing here so far...</p>
-            )}
-          </div>
-        </section>
-      </div>
+          </h2>
+        </div>
+        <div className={style.listContainer}>
+          {notes.length ? (
+            notes.map((note: Note) => (
+              <NoteCard
+                key={note.id}
+                {...note}
+                onDelete={(id) => {
+                  deleteNote(date, id);
+                  setNotes(getDataForDay(date).notes);
+                }}
+              />
+            ))
+          ) : (
+            <p className={style.listIsEmpty}>There's nothing here so far...</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
