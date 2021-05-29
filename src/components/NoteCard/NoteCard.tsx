@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import style from './NoteCard.module.scss';
 import useLongPress from '../../hooks/useLongPress';
 
@@ -20,15 +20,17 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
+  let ref = useRef<HTMLDivElement | null>(null);
+
   const setupListener = () => {
     const listener = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).matches(`.${style.handheldDeleteOverlay} *`)) {
+      if (!e.composedPath().includes(ref.current as HTMLDivElement)) {
         setLongPressed(false);
         document.removeEventListener('click', listener);
       }
     };
     document.addEventListener('click', listener);
-  };
+  }
 
   const longPress = {
     ...useLongPress(() => {
@@ -38,7 +40,7 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
   };
 
   return (
-    <div className={`${style.noteCard} ${isLongPressed && style.longPressed}`} style={{ maxWidth: width }} tabIndex={0} {...longPress}>
+    <div className={`${style.noteCard} ${isLongPressed && style.longPressed}`} style={{ maxWidth: width }} tabIndex={0} {...longPress} ref={ref}>
       <span className={style.time}>{format(time, 'hh:mm a')}</span>
       <ClampLines id="note" text={text} className={style.note} buttons={false} />
       {isLongPressed && (
