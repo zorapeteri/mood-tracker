@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isToday } from 'date-fns';
 import { IoAdd, IoMenu } from 'react-icons/io5';
 import style from './App.module.scss';
 import Button from './components/Button';
@@ -31,76 +32,76 @@ function App() {
   }, [activeView]);
 
   return (
-    <div className={style.app}>
+    <div className={`${style.app} ${style[`${activeView}View`]}`}>
       <button className={style.hamburgerMenu}>
         <IoMenu />
       </button>
       <h1 className={style.greeting}>Hi {name}!</h1>
-      <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} />
-      {activeView === 'today' ? (
-        currentMood ? (
-          <CurrentMoodCard currentMood={currentMood} />
-        ) : (
-          <Button color="secondary" fontSize="1em" padding="1em 2em" className={style.recordYourMoodButton}>
-            Record your mood
-          </Button>
-        )
+      <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} className={style.viewToggle} />
+      {currentMood ? (
+        <CurrentMoodCard currentMood={currentMood} className={style.currentMoodCard} />
       ) : (
-        <Calendar
-          month={month}
-          date={date}
-          startsOnSunday={startsOnSunday}
-          daysWithData={getDaysAvailableInMonth(month)}
-          onChange={(date) => setDate(date)}
-          onMonthViewChange={(direction) => {
-            setMonth(new Date(month.getFullYear(), month.getMonth() + direction, 1));
-          }}
-        />
+        <Button color="secondary" fontSize="1em" padding="1em 2em" className={style.recordYourMoodButton}>
+          Record your mood
+        </Button>
       )}
-      <section className={style.moodLog}>
-        <h2>{activeView === 'today' ? "Today's mood log" : 'Mood log'}</h2>
-        <div className={style.listContainer}>
-          {moodLog.length ? (
-            moodLog.map((log: MoodLog) => (
-              <MoodLogItem
-                {...log}
-                key={log.id}
-                onDelete={(id) => {
-                  const isLatest = deleteMoodLog(date, id);
-                  setMoodLog(getDataForDay(date).moodLog);
-                  if (isLatest) setCurrentMood(null);
-                }}
-              />
-            ))
-          ) : (
-            <p className={style.listIsEmpty}>There's nothing here so far...</p>
-          )}
-        </div>
-      </section>
-      <section className={style.notes}>
-        <div className={style.notesHeaderContainer}>
-          <h2>{activeView === 'today' ? 'Notes for today' : 'Notes'}</h2>
-          <Button color="secondary" circular={true} fontSize="20px" padding="0">
-            <IoAdd />
-          </Button>
-        </div>
-        <div className={style.listContainer}>
-          {notes.length ? (
-            notes.map((note: Note) => (
-              <NoteCard
-                key={note.id}
-                {...note}
-                onDelete={(id) => {
-                  deleteNote(date, id);
-                  setNotes(getDataForDay(date).notes);
-                }}
-              />
-            ))
-          ) : (
-            <p className={style.listIsEmpty}>There's nothing here so far...</p>
-          )}
-        </div>
-      </section>
+      <Calendar
+        month={month}
+        date={date}
+        startsOnSunday={startsOnSunday}
+        daysWithData={getDaysAvailableInMonth(month)}
+        onChange={(date) => setDate(date)}
+        onMonthViewChange={(direction) => {
+          setMonth(new Date(month.getFullYear(), month.getMonth() + direction, 1));
+        }}
+        className={style.calendar}
+      />
+      <div className={style.sectionsContainer}>
+        <section className={style.moodLog}>
+          <h2 className={style.moodLogHeader}>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
+          <div className={style.listContainer}>
+            {moodLog.length ? (
+              moodLog.map((log: MoodLog) => (
+                <MoodLogItem
+                  {...log}
+                  key={log.id}
+                  onDelete={(id) => {
+                    const isLatest = deleteMoodLog(date, id);
+                    setMoodLog(getDataForDay(date).moodLog);
+                    if (isLatest) setCurrentMood(null);
+                  }}
+                />
+              ))
+            ) : (
+              <p className={style.listIsEmpty}>There's nothing here so far...</p>
+            )}
+          </div>
+        </section>
+        <section className={style.notes}>
+          <div className={style.notesHeaderContainer}>
+            <h2>{isToday(date) ? 'Notes for today' : 'Notes'}</h2>
+            <Button color="secondary" circular={true} fontSize="20px" padding="0">
+              <IoAdd />
+            </Button>
+          </div>
+          <div className={style.listContainer}>
+            {notes.length ? (
+              notes.map((note: Note) => (
+                <NoteCard
+                  key={note.id}
+                  {...note}
+                  onDelete={(id) => {
+                    deleteNote(date, id);
+                    setNotes(getDataForDay(date).notes);
+                  }}
+                />
+              ))
+            ) : (
+              <p className={style.listIsEmpty}>There's nothing here so far...</p>
+            )}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

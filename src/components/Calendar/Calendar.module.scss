@@ -92,4 +92,8 @@
       }
     }
   }
+
+  @media #{$medium} {
+    margin: 10px auto;
+  }
 }

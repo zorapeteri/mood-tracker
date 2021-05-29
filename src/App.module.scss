@@ -30,10 +30,15 @@ h2 {
   margin: 10px 0;
 }
 
+.sectionsContainer {
+  display: grid;
+}
+
 .listContainer {
   margin: 20px 0 0;
   display: grid;
   row-gap: 13px;
+  grid-auto-rows: min-content;
 }
 
 .listIsEmpty {
@@ -47,4 +52,132 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media #{$small, $medium} {
+  .app {
+    &.todayView {
+      .calendar {
+        display: none;
+      }
+    }
+
+    &.calendarView {
+      .currentMoodCard {
+        display: none;
+      }
+    }
+  }
+}
+
+@media #{$small} {
+  .sectionsContainer {
+    row-gap: 30px;
+  }
+}
+
+@media #{$medium} {
+  .app {
+    padding: 70px 45px 100px;
+  }
+
+  .viewToggle,
+  .currentMoodCard,
+  .recordYourMoodButton,
+  .calendar {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .viewToggle {
+    max-width: 310px;
+  }
+
+  .currentMoodCard,
+  .recordYourMoodButton {
+    max-width: 330px;
+    margin: 20px auto;
+  }
+  
+  .sectionsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 70px;
+
+    section {
+      display: contents;
+    }
+
+    .moodLog {
+      .moodLogHeader {
+        grid-row: 1;
+        grid-column: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .listContainer {
+        grid-row: 2;
+        grid-column: 1;
+      }
+    }
+
+    .notes {
+      .notesHeaderContainer {
+        grid-row: 1;
+        grid-column: 2;
+      }
+
+      .listContainer {
+        grid-row: 2;
+        grid-column: 2;
+      }
+    }
+  }
+
+  .calendar {
+    max-width: 310px;
+  }
+}
+
+@media #{$large} {
+  .app {
+    max-width: 650px;
+    margin: 70px auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto repeat(2, 165px);
+    grid-template-areas: "heading heading"
+                         "calendar currentmoodcard"
+                         "calendar moodlog"
+                         "notes moodlog";
+    column-gap: 50px;
+
+    .viewToggle {
+      display: none;
+    }
+
+    .sectionsContainer {
+      display: contents;
+    }
+
+    .calendar {
+      grid-area: calendar;
+      height: fit-content;
+      margin-top: 0;
+    }
+
+    .currentMoodCard {
+      grid-area: currentmoodcard;
+    }
+
+    .moodLog {
+      grid-area: moodlog;
+      margin-top: 10px;
+    }
+
+    .notes {
+      grid-area: notes;
+    }
+  }
 }
