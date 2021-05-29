@@ -171,6 +171,12 @@ h2 {
       grid-area: currentmoodcard;
     }
 
+    .recordYourMoodButton {
+      grid-area: currentmoodcard;
+      height: fit-content;
+      place-self: center;
+    }
+
     .moodLog {
       grid-area: moodlog;
       margin-top: 10px;
