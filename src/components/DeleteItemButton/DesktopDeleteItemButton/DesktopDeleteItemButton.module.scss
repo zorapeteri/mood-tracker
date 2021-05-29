@@ -1,0 +1,41 @@
+@import '../../../scss/variables.scss';
+
+.desktopDeleteButtonContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  width: 50px;
+
+  .desktopDeleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 3px;
+    font-size: 1em;
+    color: #2c2738;
+    background-color: #dbe2ea;
+    height: 2em;
+    width: 2em;
+    transition: all 0.2s linear;
+
+    &:hover {
+      transform: rotate(360deg);
+      color: $color-white;
+      background-color: $color-error;
+    }
+  }
+
+  &.left {
+    left: -50px;
+    justify-content: flex-start;
+  }
+
+  &.right {
+    right: -50px;
+    justify-content: flex-end;
+  }
+}

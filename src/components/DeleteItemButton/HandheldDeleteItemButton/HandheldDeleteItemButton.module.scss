@@ -1,0 +1,39 @@
+@import '../../../scss/variables.scss';
+
+.handheldDeleteOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  .handheldDeleteOverlayBlock {
+    background-color: $color-white;
+    opacity: 0.5;
+  }
+
+  .handheldDeleteButton {
+    background-color: $color-error;
+    color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    font-size: 1.4em;
+
+    &:hover {
+      background-color: darken($color-error, 10%);
+    }
+
+    svg {
+      pointer-events: none;
+    }
+  }
+
+  @media #{$large} {
+    display: none;
+  }
+}

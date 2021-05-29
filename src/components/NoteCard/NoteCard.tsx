@@ -4,8 +4,8 @@ import useLongPress from '../../hooks/useLongPress';
 
 import ClampLines from 'react-clamp-lines';
 
-import { IoClose, IoTrashOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
+import DeleteItemButton from '../DeleteItemButton';
 
 type NoteCardProps = {
   id: string;
@@ -40,22 +40,22 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
   };
 
   return (
-    <div className={`${style.noteCard} ${isLongPressed && style.longPressed}`} style={{ maxWidth: width }} tabIndex={0} {...longPress} ref={ref}>
+    <div
+      className={`${style.noteCard} ${isLongPressed && style.longPressed}`}
+      style={{ maxWidth: width }}
+      tabIndex={0}
+      {...longPress}
+      ref={ref}
+    >
       <span className={style.time}>{format(time, 'hh:mm a')}</span>
       <ClampLines id="note" text={text} className={style.note} buttons={false} />
-      {isLongPressed && (
-        <div className={style.handheldDeleteOverlay}>
-          <div className={style.handheldDeleteOverlayBlock}></div>
-          <button className={style.handheldDeleteButton} title="delete this note" onClick={() => onDelete(id)}>
-            <IoClose />
-          </button>
-        </div>
-      )}
-      <div className={style.desktopDeleteContainer}>
-        <button className={style.desktopDeleteButton} title="delete this note" onClick={() => onDelete(id)}>
-          <IoTrashOutline />
-        </button>
-      </div>
+      <DeleteItemButton
+        isLongPressed={isLongPressed}
+        title="delete this note"
+        onDelete={() => onDelete(id)}
+        side="left"
+        className={style.desktopDeleteButton}
+      />
     </div>
   );
 };

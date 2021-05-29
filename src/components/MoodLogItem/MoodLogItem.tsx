@@ -3,9 +3,8 @@ import style from './MoodLogItem.module.scss';
 import moodNames from '../../moodNames';
 import useLongPress from '../../hooks/useLongPress';
 
-import { IoClose, IoTrashOutline } from 'react-icons/io5';
 import { format } from 'date-fns';
-import { isConstructorDeclaration } from 'typescript';
+import DeleteItemButton from '../DeleteItemButton';
 
 type MoodLogItemProps = {
   id: string;
@@ -38,19 +37,13 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
     <div className={`${style.moodLogItem} ${isLongPressed && style.longPressed} ${className}`} {...longPress} ref={ref}>
       <img src={`${process.env.PUBLIC_URL}/assets/moods/${mood}.png`} alt={`${moodNames[mood]} mood emoji icon`} />
       <span>{format(time, 'hh:mm a')}</span>
-      {isLongPressed && (
-        <div className={style.handheldDeleteOverlay}>
-          <div className={style.handheldDeleteOverlayBlock}></div>
-          <button className={style.handheldDeleteButton} title="delete this mood log item" onClick={() => onDelete(id)}>
-            <IoClose />
-          </button>
-        </div>
-      )}
-      <div className={style.desktopDeleteContainer}>
-        <button className={style.desktopDeleteButton} title="delete this mood log item" onClick={() => onDelete(id)}>
-          <IoTrashOutline />
-        </button>
-      </div>
+      <DeleteItemButton
+        isLongPressed={isLongPressed}
+        title="delete this mood log item"
+        onDelete={() => onDelete(id)}
+        side="right"
+        className={style.desktopDeleteButton}
+      />
     </div>
   );
 };

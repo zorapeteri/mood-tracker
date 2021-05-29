@@ -16,8 +16,7 @@
     height: 2em;
   }
 
-  .desktopDeleteContainer,
-  .handheldDeleteOverlay {
+  .desktopDeleteButton {
     display: none;
   }
 
@@ -25,36 +24,8 @@
     background-color: darken($color-pastel-purple, 10%);
 
     @media #{$large} {
-      .desktopDeleteContainer {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: -50px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        background-color: transparent;
-        width: 50px;
-  
-        .desktopDeleteButton {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 50%;
-          padding: 3px;
-          font-size: 1em;
-          color: #2c2738;
-          background-color: #dbe2ea;
-          height: 2em;
-          width: 2em;
-          transition: all 0.2s linear;
-    
-          &:hover {
-            transform: rotate(360deg);
-            color: $color-white;
-            background-color: $color-error;
-          }
-        }
+      .desktopDeleteButton {
+        display: grid;
       }
     }
   }
@@ -70,40 +41,6 @@
       animation: bump 0.2s ease-in-out;
       background-color: $color-pastel-purple;
       overflow: hidden;
-    }
-
-    .handheldDeleteOverlay {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 3fr 1fr;
-  
-      .handheldDeleteOverlayBlock {
-        background-color: $color-white;
-        opacity: 0.5;
-      }
-  
-      .handheldDeleteButton {
-        background-color: $color-error;
-        color: $color-white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0;
-        font-size: 1.4em;
-  
-        &:hover {
-          background-color: darken($color-error, 10%);
-        }
-
-        svg {
-          pointer-events: none;
-        }
-      }
     }
   }
 }
