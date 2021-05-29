@@ -44,7 +44,7 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
         </div>
       )}
       <div className={style.desktopDeleteContainer}>
-        <button className={style.desktopDeleteButton}>
+        <button className={style.desktopDeleteButton} title="delete this mood log item" onClick={() => onDelete(id)}>
           <IoTrashOutline />
         </button>
       </div>

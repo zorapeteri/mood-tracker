@@ -50,7 +50,7 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
         </div>
       )}
       <div className={style.desktopDeleteContainer}>
-        <button className={style.desktopDeleteButton}>
+        <button className={style.desktopDeleteButton} title="delete this note" onClick={() => onDelete(id)}>
           <IoTrashOutline />
         </button>
       </div>
