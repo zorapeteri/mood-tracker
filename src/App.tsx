@@ -16,23 +16,20 @@ function App() {
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
-  const [month, setMonth] = useState<Date>(new Date());
   const [date, setDate] = useState<Date>(new Date());
 
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay(date).moodLog);
   const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
 
   useEffect(() => {
-    setMonth(new Date(date.getFullYear(), date.getMonth(), 1));
-    setMoodLog(getDataForDay(date).moodLog);
-    setNotes(getDataForDay(date).notes);
+    const dataForDay = getDataForDay(date);
+    setMoodLog(dataForDay.moodLog);
+    setNotes(dataForDay.notes);
   }, [date]);
 
   useEffect(() => {
     if (activeView === 'today' && !isToday(date)) setDate(new Date());
   }, [activeView, date]);
-
-  console.count('counter');
 
   return (
     <div className={`${style.app} ${style[`${activeView}View`]}`}>
@@ -49,14 +46,9 @@ function App() {
         </Button>
       )}
       <Calendar
-        month={month}
         date={date}
         startsOnSunday={startsOnSunday}
-        daysWithData={getDaysAvailableInMonth(month)}
         onChange={(date) => setDate(date)}
-        onMonthViewChange={(direction) => {
-          setMonth(new Date(month.getFullYear(), month.getMonth() + direction, 1));
-        }}
         className={style.calendar}
       />
       <section className={style.moodLog}>

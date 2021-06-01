@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './Calendar.module.scss';
 import {
   isThisYear,
@@ -12,16 +12,15 @@ import {
   subDays,
   isToday,
   startOfMonth,
+  isSameMonth,
 } from 'date-fns';
 
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
+import { getDaysAvailableInMonth } from '../../helpers';
 
 type CalendarProps = {
-  month: Date;
   date: Date;
-  daysWithData: number[];
   startsOnSunday: boolean;
-  onMonthViewChange: (direction: 1 | -1) => void;
   onChange: (date: Date) => void;
   className?: string;
 };
@@ -52,7 +51,19 @@ const getDaysNeededFromNextMonth = (date: Date, startsOnSunday: boolean) => {
 };
 
 const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) => {
-  const { month, date, daysWithData, startsOnSunday, onMonthViewChange, onChange, className } = props;
+  const { date, startsOnSunday, onChange, className } = props;
+
+  const [month, setMonth] = useState<Date>(startOfMonth(date));
+
+  const onMonthViewChange = (direction: number) => {
+    setMonth(new Date(month.getFullYear(), month.getMonth() + direction, 1));
+  };
+
+  useEffect(() => {
+    if (!isSameMonth(date, month)) setMonth(startOfMonth(date));
+  }, [date, month]);
+
+  const daysWithData = getDaysAvailableInMonth(month);
 
   const days = Array(getDaysInMonth(month))
     .fill(1)
