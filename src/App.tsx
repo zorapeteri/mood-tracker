@@ -8,12 +8,10 @@ import CurrentMoodCard from './components/CurrentMoodCard';
 import MoodLogItem from './components/MoodLogItem';
 import NoteCard from './components/NoteCard';
 import ViewToggle from './components/ViewToggle';
-import { deleteMoodLog, deleteNote, getDataForDay, getDaysAvailableInMonth, getLatestMood, getUserPreferences } from './helpers';
+import { deleteMoodLog, deleteNote, getDataForDay, getLatestMood, getUserPreferences } from './helpers';
 
 
 function App() {
-  const { name } = getUserPreferences();
-
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [date, setDate] = useState<Date>(new Date());
@@ -36,7 +34,7 @@ function App() {
       <button className={style.hamburgerMenu}>
         <IoMenu />
       </button>
-      <h1 className={style.greeting}>Hi {name}!</h1>
+      <h1>Hi {getUserPreferences().name}!</h1>
       <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} className={style.viewToggle} />
       {currentMood ? (
         <CurrentMoodCard currentMood={currentMood} className={style.currentMoodCard} />
