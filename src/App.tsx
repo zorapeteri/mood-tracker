@@ -10,14 +10,15 @@ import NoteCard from './components/NoteCard';
 import ViewToggle from './components/ViewToggle';
 import { deleteMoodLog, deleteNote, getDataForDay, getDaysAvailableInMonth, getLatestMood, getUserPreferences } from './helpers';
 
-function App() {
 
+function App() {
   const { name, startsOnSunday } = getUserPreferences();
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [month, setMonth] = useState<Date>(new Date());
   const [date, setDate] = useState<Date>(new Date());
+
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay(date).moodLog);
   const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
 
@@ -28,8 +29,10 @@ function App() {
   }, [date]);
 
   useEffect(() => {
-    if (activeView === 'today') setDate(new Date());
-  }, [activeView]);
+    if (activeView === 'today' && !isToday(date)) setDate(new Date());
+  }, [activeView, date]);
+
+  console.count('counter');
 
   return (
     <div className={`${style.app} ${style[`${activeView}View`]}`}>
