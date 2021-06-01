@@ -12,7 +12,7 @@ import { deleteMoodLog, deleteNote, getDataForDay, getDaysAvailableInMonth, getL
 
 
 function App() {
-  const { name, startsOnSunday } = getUserPreferences();
+  const { name } = getUserPreferences();
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
@@ -45,12 +45,7 @@ function App() {
           Record your mood
         </Button>
       )}
-      <Calendar
-        date={date}
-        startsOnSunday={startsOnSunday}
-        onChange={(date) => setDate(date)}
-        className={style.calendar}
-      />
+      <Calendar date={date} onChange={(date) => setDate(date)} className={style.calendar} />
       <section className={style.moodLog}>
         <h2 className={style.moodLogHeader}>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
         <div className={style.listContainer}>

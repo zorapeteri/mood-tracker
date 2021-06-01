@@ -16,11 +16,10 @@ import {
 } from 'date-fns';
 
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
-import { getDaysAvailableInMonth } from '../../helpers';
+import { getDaysAvailableInMonth, getUserPreferences } from '../../helpers';
 
 type CalendarProps = {
   date: Date;
-  startsOnSunday: boolean;
   onChange: (date: Date) => void;
   className?: string;
 };
@@ -51,7 +50,7 @@ const getDaysNeededFromNextMonth = (date: Date, startsOnSunday: boolean) => {
 };
 
 const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) => {
-  const { date, startsOnSunday, onChange, className } = props;
+  const { date, onChange, className } = props;
 
   const [month, setMonth] = useState<Date>(startOfMonth(date));
 
@@ -69,6 +68,8 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
     .fill(1)
     .map((x, y) => x + y)
     .map((day) => new Date(month.getFullYear(), month.getMonth(), day));
+
+  const { startsOnSunday } = getUserPreferences();
 
   const daysOfTheWeek = startsOnSunday ? ['S', 'M', 'T', 'W', 'T', 'F', 'S'] : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
