@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isToday } from 'date-fns';
 import MoodLogItem from '../MoodLogItem';
 import { getDataForDay, deleteMoodLog } from '../../helpers';
@@ -14,6 +14,10 @@ const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: Moo
   const { date, className, resetCurrentMood } = props;
 
   const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay().moodLog);
+
+  useEffect(() => {
+    setMoodLog(getDataForDay(date).moodLog);
+  }, [date]);
 
   const onDelete = (id: string) => {
     const isLatest = deleteMoodLog(date, id);

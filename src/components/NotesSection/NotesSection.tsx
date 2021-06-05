@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isToday } from 'date-fns';
 import { IoAdd } from 'react-icons/io5';
 import Button from '../Button';
@@ -14,6 +14,10 @@ type NotesSectionProps = {
 const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSectionProps) => {
   const { date, className } = props;
   const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
+
+  useEffect(() => {
+    setNotes(getDataForDay(date).notes);
+  }, [date]);
 
   return (
     <section className={className}>
