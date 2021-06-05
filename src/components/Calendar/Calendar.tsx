@@ -62,8 +62,6 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
     if (!isSameMonth(date, month)) setMonth(startOfMonth(date));
   }, [date, month]);
 
-  console.log({ date });
-
   const days = Array(getDaysInMonth(month))
     .fill(1)
     .map((x, y) => x + y)
