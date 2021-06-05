@@ -19,11 +19,11 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
-  let ref = useRef<HTMLDivElement | null>(null);
+  let ref = useRef<HTMLLIElement | null>(null);
 
   const setupListener = () => {
     const listener = (e: MouseEvent) => {
-      if (!e.composedPath().includes(ref.current as HTMLDivElement)) {
+      if (!e.composedPath().includes(ref.current as HTMLLIElement)) {
         setLongPressed(false);
         document.removeEventListener('click', listener);
       }
@@ -34,7 +34,7 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
   const longPress = { ...useLongPress(() => { setLongPressed(true); setupListener(); }) };
 
   return (
-    <div className={`${style.moodLogItem} ${isLongPressed && style.longPressed} ${className}`} {...longPress} ref={ref}>
+    <li className={`${style.moodLogItem} ${isLongPressed && style.longPressed} ${className}`} {...longPress} ref={ref}>
       <img src={`${process.env.PUBLIC_URL}/assets/moods/${mood}.png`} alt={`${moodNames[mood]} mood emoji icon`} />
       <span>{format(time, 'hh:mm a')}</span>
       <DeleteItemButton
@@ -44,7 +44,7 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
         side="right"
         className={style.desktopDeleteButton}
       />
-    </div>
+    </li>
   );
 };
 

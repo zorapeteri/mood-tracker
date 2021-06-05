@@ -20,11 +20,11 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
-  let ref = useRef<HTMLDivElement | null>(null);
+  let ref = useRef<HTMLLIElement | null>(null);
 
   const setupListener = () => {
     const listener = (e: MouseEvent) => {
-      if (!e.composedPath().includes(ref.current as HTMLDivElement)) {
+      if (!e.composedPath().includes(ref.current as HTMLLIElement)) {
         setLongPressed(false);
         document.removeEventListener('click', listener);
       }
@@ -40,7 +40,7 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
   };
 
   return (
-    <div
+    <li
       className={`${style.noteCard} ${isLongPressed && style.longPressed}`}
       style={{ maxWidth: width }}
       tabIndex={0}
@@ -56,7 +56,7 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
         side="left"
         className={style.desktopDeleteButton}
       />
-    </div>
+    </li>
   );
 };
 

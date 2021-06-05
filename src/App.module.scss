@@ -50,22 +50,15 @@ h2 {
   align-items: center;
 }
 
-.recordYourMoodButton {
-  margin: 10px 0;
-}
-
-.listContainer {
+ol {
   margin: 20px 0 0;
   display: grid;
   row-gap: 13px;
   grid-auto-rows: min-content;
 }
 
-.listIsEmpty {
-  color: $color-muted;
-  text-align: center;
-  font-size: 14px;
-  padding: 10px 0;
+.recordYourMoodButton {
+  margin: 10px 0;
 }
 
 @media #{$small} {
