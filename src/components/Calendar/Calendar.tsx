@@ -16,7 +16,7 @@ import {
 } from 'date-fns';
 
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
-import { getDaysAvailableInMonth, getUserPreferences } from '../../helpers';
+import { getUserPreferences } from '../../helpers';
 
 type CalendarProps = {
   date: Date;
@@ -62,7 +62,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
     if (!isSameMonth(date, month)) setMonth(startOfMonth(date));
   }, [date, month]);
 
-  const daysWithData = getDaysAvailableInMonth(month);
+  console.log({ date });
 
   const days = Array(getDaysInMonth(month))
     .fill(1)
@@ -91,16 +91,12 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
       </div>
       <div className={style.days}>
         {getDaysNeededFromPreviousMonth(month, startsOnSunday).map((day) => (
-          <button key={day.toString()} className={style.notThisMonth}>
+          <button key={day.toString()} className={style.notThisMonth} onClick={() => onChange(day)}>
             {day.getDate()}
           </button>
         ))}
         {days.map((day) => {
-          const className = [
-            daysWithData.includes(day.getDate()) ? undefined : style.unavailable,
-            isSameDay(date, day) ? style.selected : undefined,
-            isToday(day) ? style.today : undefined,
-          ].join(' ');
+          const className = [isSameDay(date, day) && style.selected, isToday(day) && style.today].join(' ');
           return (
             <button key={day.toString()} className={className} onClick={() => onChange(day)}>
               {day.getDate()}
@@ -108,7 +104,7 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
           );
         })}
         {getDaysNeededFromNextMonth(month, startsOnSunday).map((day) => (
-          <button key={day.toString()} className={style.notThisMonth}>
+          <button key={day.toString()} className={style.notThisMonth} onClick={() => onChange(day)}>
             {day.getDate()}
           </button>
         ))}
