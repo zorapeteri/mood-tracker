@@ -10,6 +10,8 @@ import NotesSection from './components/NotesSection';
 import MoodLogSection from './components/MoodLogSection';
 import RecordYourMoodButton from './components/RecordYourMoodButton';
 import Greeting from './components/Greeting';
+import useBreakpoint from 'use-breakpoint';
+import BREAKPOINTS from './breakpoints';
 
 
 function App() {
@@ -17,9 +19,11 @@ function App() {
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [date, setDate] = useState<Date>(new Date());
 
+  const { breakpoint } = useBreakpoint(BREAKPOINTS);
+
   useEffect(() => {
-    if (activeView === 'today' && !isToday(date)) setDate(new Date());
-  }, [activeView, date]);
+    if (breakpoint !== 'large' && activeView === 'today' && !isToday(date)) setDate(new Date());
+  }, [activeView, date, breakpoint]);
 
   return (
     <div className={`${style.app} ${style[`${activeView}View`]}`}>
