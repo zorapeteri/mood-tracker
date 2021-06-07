@@ -1,0 +1,178 @@
+@import '../../scss/variables.scss';
+
+.home {
+  position: relative;
+  display: grid;
+  row-gap: 20px;
+}
+
+.hamburgerMenu {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background-color: transparent;
+  font-size: 1.6em;
+  box-shadow: none;
+}
+
+h1 {
+  font-weight: 600;
+  margin: 5px 0;
+  grid-area: heading;
+}
+
+.viewToggle {
+  grid-area: viewtoggle;
+}
+
+.currentMoodCard, .recordYourMoodButton {
+  grid-area: currentmoodcard;
+}
+
+.calendar {
+  grid-area: calendar;
+}
+
+.moodLog {
+  grid-area: moodlog;
+}
+
+.notes {
+  grid-area: notes;
+}
+
+h2 {
+  font-size: 17px;
+  font-weight: 600;
+  height: 31px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ol {
+  margin: 20px 0 0;
+  display: grid;
+  row-gap: 13px;
+  grid-auto-rows: min-content;
+  list-style-type: none;
+}
+
+.recordYourMoodButton {
+  margin: 10px 0;
+}
+
+@media #{$small} {
+  .home {
+    padding: 60px 30px 100px;
+    &.todayView {
+      grid-template-areas: "heading"
+                           "viewtoggle"
+                           "currentmoodcard"
+                           "moodlog"
+                           "notes";
+    }
+
+    &.calendarView {
+      grid-template-areas: "heading"
+                           "viewtoggle"
+                           "calendar"
+                           "moodlog"
+                           "notes";
+    }
+                         
+  }
+}
+
+@media #{$small, $medium} {
+  .home {
+    &.todayView .calendar,
+    &.calendarView .currentMoodCard,
+    &.calendarView .recordYourMoodButton {
+      display: none;
+    }
+  }
+}
+
+@media #{$medium} {
+  .home {
+    padding: 70px 45px 100px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 70px;
+
+    &.todayView {
+      grid-template-areas: "heading heading"
+      "viewtoggle viewtoggle"
+      "currentmoodcard currentmoodcard"
+      "moodlog notes";
+    }
+
+    &.calendarView {
+      grid-template-areas: "heading heading"
+      "viewtoggle viewtoggle"
+      "calendar calendar"
+      "moodlog notes";
+    }
+    
+  }
+
+  .viewToggle,
+  .currentMoodCard,
+  .recordYourMoodButton,
+  .calendar {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .viewToggle {
+    max-width: 310px;
+  }
+
+  .currentMoodCard,
+  .recordYourMoodButton {
+    max-width: 330px;
+    margin: 20px auto;
+  }
+
+  .calendar {
+    max-width: 310px;
+  }
+}
+
+@media #{$large} {
+  .home {
+    max-width: 650px;
+    margin: 70px auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto repeat(2, 165px);
+    grid-template-areas: "heading heading"
+                         "calendar currentmoodcard"
+                         "calendar moodlog"
+                         "notes moodlog";
+    column-gap: 50px;
+
+    .viewToggle {
+      display: none;
+    }
+
+    .calendar {
+      height: fit-content;
+      margin-top: 0;
+    }
+
+    .recordYourMoodButton {
+      height: fit-content;
+      place-self: center;
+    }
+
+    .moodLog {
+      margin-top: 10px;
+    }
+
+    .hamburgerMenu {
+      top: 0;
+      right: 0;
+    }
+  }
+}

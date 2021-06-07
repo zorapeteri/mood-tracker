@@ -6,10 +6,11 @@ import Button from '../Button';
 type CurrentMoodCardProps = {
   currentMood: Mood;
   className?: string;
+  onChangeClick: () => void;
 };
 
 const CurrentMoodCard: React.FunctionComponent<CurrentMoodCardProps> = (props: CurrentMoodCardProps) => {
-  const { currentMood, className } = props;
+  const { currentMood, className, onChangeClick } = props;
 
   return (
     <div className={`${style.currentMoodCard} ${className}`}>
@@ -18,7 +19,7 @@ const CurrentMoodCard: React.FunctionComponent<CurrentMoodCardProps> = (props: C
         <img src={`${process.env.PUBLIC_URL}/assets/moods/${currentMood}.png`} alt={`${moodNames[currentMood]} mood emoji icon`} />
         <span>{moodNames[currentMood]}</span>
       </div>
-      <Button color="primary" fontSize="11px" padding="1em 2em">
+      <Button color="primary" fontSize="11px" padding="1em 2em" onClick={() => onChangeClick()}>
         Change
       </Button>
     </div>

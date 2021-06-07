@@ -1,0 +1,36 @@
+@import '../../scss/variables.scss';
+
+.moodPicker {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .closeButton {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    background-color: transparent;
+    font-size: 1.8em;
+    box-shadow: none;
+    transition: all 0.2s linear;
+
+    &:hover, &:focus-visible {
+      opacity: 0.4;
+    }
+  }
+
+  h1 {
+    font-size: 1.4em;
+    text-align: center;
+  }
+
+  ol {
+    list-style-type: none;
+    display: grid;
+    row-gap: 1.1em;
+    margin-top: 2em;
+  }
+}
