@@ -51,12 +51,12 @@ export const saveMoodLog = (mood: Mood) => {
     JSON.stringify({
       ...today,
       moodLog: [
-        ...today.moodLog,
         {
           id,
           time: new Date(),
           mood,
         },
+        ...today.moodLog,
       ],
     }),
   );
