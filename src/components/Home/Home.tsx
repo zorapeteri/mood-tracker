@@ -5,7 +5,7 @@ import style from './Home.module.scss';
 import Calendar from '../Calendar';
 import CurrentMoodCard from '../CurrentMoodCard';
 import ViewToggle from '../ViewToggle';
-import { getLatestMood, saveMoodLog } from '../../helpers';
+import { getLatestMood } from '../../helpers';
 import NotesSection from '../NotesSection';
 import MoodLogSection from '../MoodLogSection';
 import RecordYourMoodButton from '../RecordYourMoodButton';
@@ -15,10 +15,11 @@ import BREAKPOINTS from '../../breakpoints';
 
 type HomeProps = {
   saveMood: () => void;
+  editNote: (note: Note) => void;
 };
 
 const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const { saveMood } = props;
+  const { saveMood, editNote } = props;
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
@@ -44,7 +45,7 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
       )}
       <Calendar date={date} onChange={(date) => setDate(date)} className={style.calendar} />
       <MoodLogSection className={style.moodLog} date={date} resetCurrentMood={() => setCurrentMood(null)} />
-      <NotesSection className={style.notes} date={date} />
+      <NotesSection className={style.notes} date={date} editNote={(note: Note) => editNote(note)} />
     </div>
   );
 };
