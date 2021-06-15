@@ -16,7 +16,7 @@ type ContextType = {
   month: Date;
   currentMood: Mood | null;
   editingNote: Note | null;
-  moodLog: Mood[];
+  moodLog: MoodLog[];
   notes: Note[];
   userPreferences: UserPreferencesType | null;
   setDate: (date: Date) => void;
@@ -47,7 +47,7 @@ const ContextProvider = (props: { children: any }) => {
   const [month, setMonth] = useState<Date>(new Date());
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [editingNote, setEditingNote] = useState<Note | null>(null);
-  const [moodLog, setMoodLog] = useState<Mood[]>([]);
+  const [moodLog, setMoodLog] = useState<MoodLog[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
   const [userPreferences, setUserPreferences] = useState<UserPreferencesType | null>(
     getUserPreferences(),
