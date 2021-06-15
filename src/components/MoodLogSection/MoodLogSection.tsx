@@ -1,28 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/Context';
 import { isToday } from 'date-fns';
 import MoodLogItem from '../MoodLogItem';
-import { getDataForDay, deleteMoodLog } from '../../helpers';
 import NothingHere from '../NothingHere';
 
 type MoodLogSectionProps = {
-  date: Date;
   className: string;
-  resetCurrentMood: () => void;
 };
 
 const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: MoodLogSectionProps) => {
-  const { date, className, resetCurrentMood } = props;
+  const { className } = props;
 
-  const [moodLog, setMoodLog] = useState<MoodLog[]>(getDataForDay().moodLog);
-
-  useEffect(() => {
-    setMoodLog(getDataForDay(date).moodLog);
-  }, [date]);
+  const { date, moodLog, deleteMoodLog } = useContext(Context);
 
   const onDelete = (id: string) => {
-    const isLatest = deleteMoodLog(date, id);
-    setMoodLog(getDataForDay(date).moodLog);
-    if (isLatest) resetCurrentMood();
+    deleteMoodLog(date, id);
   };
 
   return (
@@ -30,7 +22,7 @@ const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: Moo
       <h2>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
       <ol>
         {moodLog.length ? (
-          moodLog.map((log: MoodLog) => <MoodLogItem {...log} key={log.id} onDelete={(id) => onDelete(id)} />)
+          moodLog.map((log: MoodLog) => <MoodLogItem {...log} key={log.id} onDelete={(id) => onDelete(log.id)} />)
         ) : (
           <NothingHere />
         )}
