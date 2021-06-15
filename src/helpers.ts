@@ -16,7 +16,7 @@ export const isMood = (value: any): value is Mood => {
 };
 
 export const getUserPreferences = () => {
-  return JSON.parse(ls.get('preferences') || '{}');
+  return JSON.parse(ls.get('preferences') || 'null');
 };
 
 export const setUserPreferences = (preferences: UserPreferences) => {
@@ -89,9 +89,9 @@ export const getLatestMood = () => {
 };
 
 export const saveNote = (note: Note) => {
-  const day = getDataForDay(note.time);
+  const day = getDataForDay(note.date);
   ls.set(
-    format(note.time),
+    format(note.date),
     JSON.stringify({
       ...day,
       notes: note.id ? day.notes.map((n: Note) => (n.id === note.id ? note : n)) : [...day.notes, { ...note, id: uuid() }],
