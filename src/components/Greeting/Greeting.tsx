@@ -1,8 +1,11 @@
-import React from 'react';
-import { getUserPreferences } from '../../helpers';
+import React, { useContext } from 'react';
+import { Context } from '../../context/Context';
 
 const Greeting: React.FunctionComponent = () => {
-  return <h1>Hi {getUserPreferences().name}!</h1>;
+
+  const { userPreferences } = useContext(Context);
+
+  return <h1>Hi {userPreferences?.name}!</h1>;
 };
 
 export default Greeting;
