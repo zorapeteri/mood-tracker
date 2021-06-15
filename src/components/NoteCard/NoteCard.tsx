@@ -4,19 +4,18 @@ import useLongPress from '../../hooks/useLongPress';
 
 import ClampLines from 'react-clamp-lines';
 
-import { format } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 import DeleteItemButton from '../DeleteItemButton';
 
 type NoteCardProps = {
-  id: string;
-  time: Date;
-  text: string;
+  note: Note;
   onDelete: (id: string) => void;
   width?: string;
+  onClick: () => void;
 };
 
 const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) => {
-  const { id, time, text, onDelete, width } = props;
+  const { note, onDelete, width, onClick } = props;
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
 
@@ -46,13 +45,18 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
       tabIndex={0}
       {...longPress}
       ref={ref}
+      onClick={() => {
+        if (!isLongPressed) {
+          onClick();
+        }
+      }}
     >
-      <span className={style.time}>{format(time, 'hh:mm a')}</span>
-      <ClampLines id="note" text={text} className={style.note} buttons={false} />
+      {isSameDay(note.date, note.time) && <span className={style.time}>{format(note.time, 'hh:mm a')}</span>}
+      <ClampLines id="note" text={note.text} className={style.note} buttons={false} />
       <DeleteItemButton
         isLongPressed={isLongPressed}
         title="delete this note"
-        onDelete={() => onDelete(id)}
+        onDelete={() => onDelete(note.id)}
         side="left"
         className={style.desktopDeleteButton}
       />

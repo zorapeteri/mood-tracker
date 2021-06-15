@@ -15,7 +15,7 @@ const longNote =
 stories.add('Short note', () => {
   return (
     <div style={{ paddingLeft: '50px' }}>
-      <NoteCard id={'1'} text={shortNote} time={new Date()} onDelete={() => {}} />
+      <NoteCard note={{ id: '1', text: shortNote, time: new Date(), date: new Date() }} onDelete={() => {}} onClick={() => {}} />
     </div>
   );
 });
@@ -23,7 +23,7 @@ stories.add('Short note', () => {
 stories.add('Long note', () => {
   return (
     <div style={{ paddingLeft: '50px' }}>
-      <NoteCard id={'2'} text={longNote} time={new Date()} onDelete={() => {}} />
+      <NoteCard note={{ id: '2', text: longNote, time: new Date(), date: new Date() }} onDelete={() => {}} onClick={() => {}} />
     </div>
   );
 });
