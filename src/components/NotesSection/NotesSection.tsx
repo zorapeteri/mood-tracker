@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/Context';
 import { isToday } from 'date-fns';
 import { IoAdd } from 'react-icons/io5';
 import Button from '../Button';
 import NoteCard from '../NoteCard';
-import { getDataForDay, deleteNote } from '../../helpers';
 import NothingHere from '../NothingHere';
 
 type NotesSectionProps = {
-  date: Date;
   className: string;
-  editNote: (note: Note) => void;
 };
 
 const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSectionProps) => {
-  const { date, className, editNote } = props;
-  const [notes, setNotes] = useState<Note[]>(getDataForDay(date).notes);
+  const { className } = props;
 
-  useEffect(() => {
-    setNotes(getDataForDay(date).notes);
-  }, [date]);
+  const { date, notes, setEditingNote, deleteNote } = useContext(Context);
 
   return (
     <section className={className}>
@@ -29,7 +24,7 @@ const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSe
           circular={true}
           fontSize="20px"
           padding="0"
-          onClick={() => editNote({ id: '', time: new Date(), date, text: '' })}
+          onClick={() => setEditingNote({ id: '', time: new Date(), date, text: '' })}
         >
           <IoAdd />
         </Button>
@@ -40,11 +35,8 @@ const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSe
             <NoteCard
               key={note.id}
               note={note}
-              onDelete={(id) => {
-                deleteNote(date, id);
-                setNotes(getDataForDay(date).notes);
-              }}
-              onClick={() => editNote(note)}
+              onClick={() => setEditingNote(note)}
+              onDelete={() => deleteNote(note)}
             />
           ))
         ) : (

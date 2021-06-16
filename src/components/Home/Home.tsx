@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from '../../context/Context';
 import { isToday } from 'date-fns';
 import { IoMenu } from 'react-icons/io5';
 import style from './Home.module.scss';
 import Calendar from '../Calendar';
 import CurrentMoodCard from '../CurrentMoodCard';
 import ViewToggle from '../ViewToggle';
-import { getLatestMood } from '../../helpers';
 import NotesSection from '../NotesSection';
 import MoodLogSection from '../MoodLogSection';
 import RecordYourMoodButton from '../RecordYourMoodButton';
@@ -13,23 +13,16 @@ import Greeting from '../Greeting';
 import useBreakpoint from 'use-breakpoint';
 import BREAKPOINTS from '../../breakpoints';
 
-type HomeProps = {
-  saveMood: () => void;
-  editNote: (note: Note) => void;
-};
-
-const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const { saveMood, editNote } = props;
+const Home: React.FunctionComponent = () => {
+  const { date, setDate, currentMood } = useContext(Context);
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
-  const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
-  const [date, setDate] = useState<Date>(new Date());
 
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
 
   useEffect(() => {
     if (breakpoint !== 'large' && activeView === 'today' && !isToday(date)) setDate(new Date());
-  }, [activeView, date, breakpoint]);
+  }, [activeView, date, setDate, breakpoint]);
 
   return (
     <div className={`${style.home} ${style[`${activeView}View`]}`}>
@@ -37,15 +30,19 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
         <IoMenu />
       </button>
       <Greeting />
-      <ViewToggle activeToggle={activeView} onChange={(option) => setActiveView(option)} className={style.viewToggle} />
+      <ViewToggle
+        activeToggle={activeView}
+        onChange={option => setActiveView(option)}
+        className={style.viewToggle}
+      />
       {currentMood ? (
-        <CurrentMoodCard currentMood={currentMood} className={style.currentMoodCard} onChangeClick={() => saveMood()} />
+        <CurrentMoodCard className={style.currentMoodCard} />
       ) : (
-        <RecordYourMoodButton className={style.recordYourMoodButton} onClick={() => saveMood()} />
+        <RecordYourMoodButton className={style.recordYourMoodButton} />
       )}
-      <Calendar date={date} onChange={(date) => setDate(date)} className={style.calendar} />
-      <MoodLogSection className={style.moodLog} date={date} resetCurrentMood={() => setCurrentMood(null)} />
-      <NotesSection className={style.notes} date={date} editNote={(note: Note) => editNote(note)} />
+      <Calendar className={style.calendar} />
+      <MoodLogSection className={style.moodLog} />
+      <NotesSection className={style.notes} />
     </div>
   );
 };

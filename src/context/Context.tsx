@@ -3,6 +3,8 @@ import {
   getLatestMood,
   getUserPreferences,
   deleteMoodLog as deleteMoodLogFromLS,
+  saveMoodLog as saveMoodLogToLS,
+  deleteNote as deleteNoteFromLS,
   getDataForDay,
 } from '../helpers';
 
@@ -13,24 +15,31 @@ type UserPreferencesType = {
 
 type ContextType = {
   date: Date;
-  month: Date;
   currentMood: Mood | null;
   editingNote: Note | null;
+  setEditingNote: (note: Note | null) => void;
+  deleteNote: (note: Note) => void;
   moodLog: MoodLog[];
+  pickingMood: boolean;
+  setPickingMood: (arg: boolean) => void;
   notes: Note[];
   userPreferences: UserPreferencesType | null;
   setDate: (date: Date) => void;
   resetCurrentMood: () => void;
   deleteMoodLog: (date: Date, id: string) => void;
+  saveMoodLog: (mood: Mood) => void;
 };
 
 const initialState: ContextType = {
   date: new Date(),
-  month: new Date(),
   currentMood: null,
   editingNote: null,
+  setEditingNote: (note: Note | null) => {},
+  deleteNote: (note: Note) => {},
   notes: [],
   moodLog: [],
+  pickingMood: false,
+  setPickingMood: (arg: boolean) => {},
   userPreferences: {
     name: '',
     startsOnSunday: false,
@@ -38,16 +47,17 @@ const initialState: ContextType = {
   setDate: (date: Date) => {},
   resetCurrentMood: () => {},
   deleteMoodLog: (date: Date, id: string) => {},
+  saveMoodLog: (mood: Mood) => {},
 };
 
 export const Context = createContext<ContextType>(initialState);
 
 const ContextProvider = (props: { children: any }) => {
   const [date, setDate] = useState<Date>(new Date());
-  const [month, setMonth] = useState<Date>(new Date());
   const [currentMood, setCurrentMood] = useState<Mood | null>(getLatestMood());
   const [editingNote, setEditingNote] = useState<Note | null>(null);
   const [moodLog, setMoodLog] = useState<MoodLog[]>([]);
+  const [pickingMood, setPickingMood] = useState<boolean>(false);
   const [notes, setNotes] = useState<Note[]>([]);
   const [userPreferences, setUserPreferences] = useState<UserPreferencesType | null>(
     getUserPreferences(),
@@ -59,10 +69,21 @@ const ContextProvider = (props: { children: any }) => {
 
   const resetCurrentMood = () => setCurrentMood(null);
 
+  const saveMoodLog = (mood: Mood) => {
+    saveMoodLogToLS(mood);
+    setMoodLog(getDataForDay().moodLog);
+    setCurrentMood(mood);
+  };
+
   const deleteMoodLog = (date: Date, id: string) => {
     const isLatest = deleteMoodLogFromLS(date, id);
     setMoodLog(getDataForDay(date).moodLog);
     if (isLatest) resetCurrentMood();
+  };
+
+  const deleteNote = (note: Note) => {
+    deleteNoteFromLS(note.date, note.id);
+    setNotes(getDataForDay(date).notes);
   };
 
   return (
@@ -70,12 +91,16 @@ const ContextProvider = (props: { children: any }) => {
       value={{
         date,
         setDate,
-        month,
         currentMood,
         resetCurrentMood,
         deleteMoodLog,
         editingNote,
+        deleteNote,
+        setEditingNote,
         moodLog,
+        pickingMood,
+        setPickingMood,
+        saveMoodLog,
         notes,
         userPreferences,
       }}

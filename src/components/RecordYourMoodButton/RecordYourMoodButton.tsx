@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/Context';
 import Button from '../Button';
 
 type RecordYourMoodButtonProps = {
   className: string;
-  onClick: () => void;
 };
 
 const RecordYourMoodButton: React.FunctionComponent<RecordYourMoodButtonProps> = (props: RecordYourMoodButtonProps) => {
-  const { className, onClick } = props;
+  const { className } = props;
+
+  const { setPickingMood } = useContext(Context);
 
   return (
-    <Button color="secondary" fontSize="1em" padding="1em 2em" className={className} onClick={() => onClick()}>
+    <Button
+      color="secondary"
+      fontSize="1em"
+      padding="1em 2em"
+      className={className}
+      onClick={() => setPickingMood(true)}
+    >
       Record your mood
     </Button>
   );
