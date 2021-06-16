@@ -14,7 +14,14 @@ const DesktopDeleteItemButton: React.FunctionComponent<DesktopDeleteItemButtonPr
 
   return (
     <div className={`${style.desktopDeleteButtonContainer} ${className} ${style[side]}`}>
-      <button className={style.desktopDeleteButton} title={title} onClick={() => onDelete()}>
+      <button
+        className={style.desktopDeleteButton}
+        title={title}
+        onClick={e => {
+          e.stopPropagation();
+          onDelete();
+        }}
+      >
         <IoTrashOutline />
       </button>
     </div>
