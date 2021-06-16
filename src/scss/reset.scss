@@ -25,6 +25,10 @@ hr {
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 abbr[title],
 dfn[title] {
   cursor: help;
