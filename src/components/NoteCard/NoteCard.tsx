@@ -51,7 +51,9 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
         }
       }}
     >
-      {isSameDay(note.date, note.time) && <span className={style.time}>{format(note.time, 'hh:mm a')}</span>}
+      {isSameDay(note.date, note.time) && (
+        <span className={style.time}>{format(note.time, 'hh:mm a')}</span>
+      )}
       <ClampLines id="note" text={note.text} className={style.note} buttons={false} />
       <DeleteItemButton
         isLongPressed={isLongPressed}

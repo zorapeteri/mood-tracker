@@ -4,6 +4,7 @@ import {
   getUserPreferences,
   deleteMoodLog as deleteMoodLogFromLS,
   saveMoodLog as saveMoodLogToLS,
+  saveNote as saveNoteToLS,
   deleteNote as deleteNoteFromLS,
   getDataForDay,
 } from '../helpers';
@@ -18,6 +19,7 @@ type ContextType = {
   currentMood: Mood | null;
   editingNote: Note | null;
   setEditingNote: (note: Note | null) => void;
+  saveNote: (note: Note) => void;
   deleteNote: (note: Note) => void;
   moodLog: MoodLog[];
   pickingMood: boolean;
@@ -35,6 +37,7 @@ const initialState: ContextType = {
   currentMood: null,
   editingNote: null,
   setEditingNote: (note: Note | null) => {},
+  saveNote: (note: Note) => {},
   deleteNote: (note: Note) => {},
   notes: [],
   moodLog: [],
@@ -65,6 +68,7 @@ const ContextProvider = (props: { children: any }) => {
 
   useEffect(() => {
     setMoodLog(getDataForDay(date).moodLog);
+    setNotes(getDataForDay(date).notes);
   }, [date]);
 
   const resetCurrentMood = () => setCurrentMood(null);
@@ -81,6 +85,11 @@ const ContextProvider = (props: { children: any }) => {
     if (isLatest) resetCurrentMood();
   };
 
+  const saveNote = (note: Note) => {
+    saveNoteToLS(note);
+    setNotes(getDataForDay(date).notes);
+  };
+
   const deleteNote = (note: Note) => {
     deleteNoteFromLS(note.date, note.id);
     setNotes(getDataForDay(date).notes);
@@ -95,6 +104,7 @@ const ContextProvider = (props: { children: any }) => {
         resetCurrentMood,
         deleteMoodLog,
         editingNote,
+        saveNote,
         deleteNote,
         setEditingNote,
         moodLog,
