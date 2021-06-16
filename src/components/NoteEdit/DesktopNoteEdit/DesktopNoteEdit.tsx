@@ -14,9 +14,14 @@ const DesktopNoteEdit: React.FunctionComponent<DesktopNoteEditProps> = (
   const { close, saveNote } = props;
 
   const [note, setNote] = useState<Note>(props.note);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const onChange = (text: string) => {
-    if (!text) return 'You cannot save an empty note';
+    if (!text) {
+      setDisabled(true);
+      return 'You cannot save an empty note';
+    }
+    setDisabled(false);
     setNote({ ...note, time: new Date(), text });
     return true;
   };
@@ -30,6 +35,7 @@ const DesktopNoteEdit: React.FunctionComponent<DesktopNoteEditProps> = (
         close();
       }}
       onClose={() => close()}
+      disableButton={disabled}
     >
       <TextField
         defaultValue={note.text}

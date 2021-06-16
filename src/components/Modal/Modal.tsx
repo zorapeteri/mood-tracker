@@ -11,25 +11,41 @@ type ModalProps = {
   onButtonClick: () => void;
   onClose: () => void;
   className?: string;
+  disableButton?: boolean;
 };
 
 const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
-  const { children, title, hideCloseButton, buttonText, onButtonClick, onClose, className } = props;
+  const {
+    children,
+    title,
+    hideCloseButton,
+    buttonText,
+    onButtonClick,
+    onClose,
+    className,
+    disableButton,
+  } = props;
 
   return (
     <div className={style.modalOverlay}>
-        <div className={`${style.modal} ${className}`}>
-          <h2>{title}</h2>
-          <div className={style.body}>{children}</div>
-          <Button className={style.button} color="primary" padding="10px 25px" fontSize="12px" onClick={() => onButtonClick()}>
-            {buttonText}
-          </Button>
-          {!hideCloseButton && (
-            <button className={style.closeButton} title="close dialog" onClick={() => onClose()}>
-              <IoClose />
-            </button>
-          )}
-        </div>
+      <div className={`${style.modal} ${className}`}>
+        <h2>{title}</h2>
+        <div className={style.body}>{children}</div>
+        <Button
+          className={style.button}
+          color={disableButton ? 'disabled' : 'primary'}
+          padding="10px 25px"
+          fontSize="12px"
+          onClick={() => onButtonClick()}
+        >
+          {buttonText}
+        </Button>
+        {!hideCloseButton && (
+          <button className={style.closeButton} title="close dialog" onClick={() => onClose()}>
+            <IoClose />
+          </button>
+        )}
+      </div>
     </div>
   );
 };

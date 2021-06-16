@@ -21,6 +21,7 @@ const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
       className={`${style[color]} ${circular && style.circular} ${className}`}
       style={{ fontSize, padding }}
       onClick={onClick}
+      disabled={color === 'disabled'}
     >
       {children}
     </button>
