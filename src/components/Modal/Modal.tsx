@@ -9,7 +9,7 @@ type ModalProps = {
   hideCloseButton?: boolean;
   buttonText: string;
   onButtonClick: () => void;
-  onClose: () => void;
+  onClose?: () => void;
   className?: string;
   disableButton?: boolean;
 };
@@ -41,7 +41,11 @@ const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
           {buttonText}
         </Button>
         {!hideCloseButton && (
-          <button className={style.closeButton} title="close dialog" onClick={() => onClose()}>
+          <button
+            className={style.closeButton}
+            title="close dialog"
+            onClick={() => onClose && onClose()}
+          >
             <IoClose />
           </button>
         )}

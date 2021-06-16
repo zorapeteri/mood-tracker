@@ -55,3 +55,30 @@
 ::-ms-input-placeholder { 
   color: $color-muted;
 }
+
+.noEmptyNoteOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+
+  .noEmptyNote {
+    background-color: $color-white;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 30px 20px;
+    display: grid;
+    row-gap: 30px;
+
+    p {
+      text-align: center;
+    }
+  }
+}
