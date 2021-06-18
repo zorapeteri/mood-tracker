@@ -26,7 +26,7 @@ const Home: React.FunctionComponent = () => {
 
   return (
     <div className={`${style.home} ${style[`${activeView}View`]}`}>
-      <button className={style.hamburgerMenu}>
+      <button className={style.hamburgerMenu} title="open settings">
         <IoMenu />
       </button>
       <Greeting />

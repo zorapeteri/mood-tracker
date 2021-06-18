@@ -24,6 +24,7 @@ const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSe
           circular={true}
           fontSize="20px"
           padding="0"
+          title="create new note"
           onClick={() => setEditingNote({ id: '', time: new Date(), date, text: '' })}
         >
           <IoAdd />

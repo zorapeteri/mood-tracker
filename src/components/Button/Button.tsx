@@ -9,11 +9,22 @@ type ButtonProps = {
   ariaLabel?: string;
   circular?: boolean;
   className?: string;
+  title?: string;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
-  const { children, color, fontSize, padding, ariaLabel, circular, className, onClick } = props;
+  const {
+    children,
+    color,
+    fontSize,
+    padding,
+    ariaLabel,
+    circular,
+    className,
+    title,
+    onClick,
+  } = props;
 
   return (
     <button
@@ -21,6 +32,7 @@ const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
       className={`${style[color]} ${circular && style.circular} ${className}`}
       style={{ fontSize, padding }}
       onClick={onClick}
+      title={title}
       disabled={color === 'disabled'}
     >
       {children}
