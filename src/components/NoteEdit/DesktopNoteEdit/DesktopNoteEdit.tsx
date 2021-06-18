@@ -36,6 +36,7 @@ const DesktopNoteEdit: React.FunctionComponent<DesktopNoteEditProps> = (
       }}
       onClose={() => close()}
       disableButton={disabled}
+      showOverlayShade={true}
     >
       <TextField
         defaultValue={note.text}

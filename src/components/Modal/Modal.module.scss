@@ -8,8 +8,11 @@
   left: 0;
   display: grid;
   place-items: center;
-  background-color: rgba(0,0,0,0.4);
   z-index: 2;
+
+  &.shade {
+    background-color: rgba(0,0,0,0.4);
+  }
 }
 
 .modal {
@@ -22,6 +25,7 @@
   position: relative;
   display: grid;
   row-gap: 20px;
+  color: $color-primary;
 
   h2 {
     font-size: 20px;

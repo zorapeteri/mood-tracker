@@ -12,6 +12,7 @@ type ModalProps = {
   onClose?: () => void;
   className?: string;
   disableButton?: boolean;
+  showOverlayShade?: boolean;
 };
 
 const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
@@ -24,10 +25,11 @@ const Modal: React.FunctionComponent<ModalProps> = (props: ModalProps) => {
     onClose,
     className,
     disableButton,
+    showOverlayShade,
   } = props;
 
   return (
-    <div className={style.modalOverlay}>
+    <div className={`${style.modalOverlay} ${showOverlayShade && 'shade'}`}>
       <div className={`${style.modal} ${className}`}>
         <h2>{title}</h2>
         <div className={style.body}>{children}</div>

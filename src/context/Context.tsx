@@ -9,11 +9,6 @@ import {
   getDataForDay,
 } from '../helpers';
 
-type UserPreferencesType = {
-  name: string;
-  startsOnSunday: boolean;
-};
-
 type ContextType = {
   date: Date;
   currentMood: Mood | null;
@@ -25,8 +20,8 @@ type ContextType = {
   pickingMood: boolean;
   setPickingMood: (arg: boolean) => void;
   notes: Note[];
-  userPreferences: UserPreferencesType | null;
-  setUserPreferences: (arg: UserPreferencesType) => void;
+  userPreferences: UserPreferences | null;
+  setUserPreferences: (arg: UserPreferences | null) => void;
   setDate: (date: Date) => void;
   resetCurrentMood: () => void;
   deleteMoodLog: (date: Date, id: string) => void;
@@ -45,7 +40,7 @@ const initialState: ContextType = {
   pickingMood: false,
   setPickingMood: (arg: boolean) => {},
   userPreferences: null,
-  setUserPreferences: (arg: UserPreferencesType) => {},
+  setUserPreferences: (arg: UserPreferences | null) => {},
   setDate: (date: Date) => {},
   resetCurrentMood: () => {},
   deleteMoodLog: (date: Date, id: string) => {},
@@ -61,7 +56,7 @@ const ContextProvider = (props: { children: any }) => {
   const [moodLog, setMoodLog] = useState<MoodLog[]>([]);
   const [pickingMood, setPickingMood] = useState<boolean>(false);
   const [notes, setNotes] = useState<Note[]>([]);
-  const [userPreferences, setUserPreferences] = useState<UserPreferencesType | null>(
+  const [userPreferences, setUserPreferences] = useState<UserPreferences | null>(
     getUserPreferences(),
   );
 

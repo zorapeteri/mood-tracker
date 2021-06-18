@@ -1,0 +1,35 @@
+@import '../../../scss/variables.scss';
+
+.handheldEditName {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  padding: 10%;
+  row-gap: 20%;
+
+  h1 {
+    font-size: 1.563rem;
+    color: $color-primary;
+    text-align: center;
+  }
+
+  input {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid $color-primary;
+    width: 70%;
+    background-color: transparent;
+    text-align: center;
+    font-size: 1.3rem;
+    transition: all 0.2s linear;
+
+    &:focus {
+      border-bottom: 2px solid $color-accent;
+    }
+  }
+}

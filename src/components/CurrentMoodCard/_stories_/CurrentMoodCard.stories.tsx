@@ -8,5 +8,5 @@ import CurrentMoodCard from '../CurrentMoodCard';
 const stories = storiesOf('CurrentMoodCard', module);
 
 stories.add('CurrentMoodCard', () => {
-  return <CurrentMoodCard currentMood={1} onChangeClick={() => {}} />;
+  return <CurrentMoodCard />;
 });
