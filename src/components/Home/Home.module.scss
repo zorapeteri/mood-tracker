@@ -4,6 +4,29 @@
   position: relative;
   display: grid;
   row-gap: 20px;
+
+  h1 {
+    font-weight: 600;
+    margin: 5px 0;
+    grid-area: heading;
+  }  
+
+  h2 {
+    font-size: 17px;
+    font-weight: 600;
+    height: 31px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ol {
+    margin: 20px 0 0;
+    display: grid;
+    row-gap: 13px;
+    grid-auto-rows: min-content;
+    list-style-type: none;
+  }
 }
 
 .hamburgerMenu {
@@ -13,12 +36,6 @@
   background-color: transparent;
   font-size: 1.6em;
   box-shadow: none;
-}
-
-h1 {
-  font-weight: 600;
-  margin: 5px 0;
-  grid-area: heading;
 }
 
 .viewToggle {
@@ -39,23 +56,6 @@ h1 {
 
 .notes {
   grid-area: notes;
-}
-
-h2 {
-  font-size: 17px;
-  font-weight: 600;
-  height: 31px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-ol {
-  margin: 20px 0 0;
-  display: grid;
-  row-gap: 13px;
-  grid-auto-rows: min-content;
-  list-style-type: none;
 }
 
 .recordYourMoodButton {

@@ -26,6 +26,7 @@ type ContextType = {
   setPickingMood: (arg: boolean) => void;
   notes: Note[];
   userPreferences: UserPreferencesType | null;
+  setUserPreferences: (arg: UserPreferencesType) => void;
   setDate: (date: Date) => void;
   resetCurrentMood: () => void;
   deleteMoodLog: (date: Date, id: string) => void;
@@ -43,10 +44,8 @@ const initialState: ContextType = {
   moodLog: [],
   pickingMood: false,
   setPickingMood: (arg: boolean) => {},
-  userPreferences: {
-    name: '',
-    startsOnSunday: false,
-  },
+  userPreferences: null,
+  setUserPreferences: (arg: UserPreferencesType) => {},
   setDate: (date: Date) => {},
   resetCurrentMood: () => {},
   deleteMoodLog: (date: Date, id: string) => {},
@@ -113,6 +112,7 @@ const ContextProvider = (props: { children: any }) => {
         saveMoodLog,
         notes,
         userPreferences,
+        setUserPreferences,
       }}
     >
       {props.children}
