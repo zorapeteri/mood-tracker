@@ -8,5 +8,5 @@ import Toggle from '../Toggle';
 const stories = storiesOf('Toggle', module);
 
 stories.add('Toggle', () => {
-  return <Toggle defaultChecked={false} />;
+  return <Toggle defaultChecked={false} onChange={checked => console.log(checked)} />;
 });

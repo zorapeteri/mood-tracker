@@ -36,6 +36,11 @@
   background-color: transparent;
   font-size: 1.6em;
   box-shadow: none;
+  transition: all 0.2s linear;
+
+  &:hover, &:focus-visible {
+    opacity: 0.5;
+  }
 }
 
 .viewToggle {

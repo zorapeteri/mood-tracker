@@ -14,7 +14,7 @@ import useBreakpoint from 'use-breakpoint';
 import BREAKPOINTS from '../../breakpoints';
 
 const Home: React.FunctionComponent = () => {
-  const { date, setDate, currentMood } = useContext(Context);
+  const { date, setDate, currentMood, setSettingsOpen } = useContext(Context);
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
 
@@ -26,7 +26,11 @@ const Home: React.FunctionComponent = () => {
 
   return (
     <div className={`${style.home} ${style[`${activeView}View`]}`}>
-      <button className={style.hamburgerMenu} title="open settings">
+      <button
+        className={style.hamburgerMenu}
+        title="open settings"
+        onClick={() => setSettingsOpen(true)}
+      >
         <IoMenu />
       </button>
       <Greeting />

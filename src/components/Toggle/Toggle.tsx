@@ -4,10 +4,16 @@ import './Toggle.scss';
 
 type ToggleProps = {
   defaultChecked: boolean;
+  onChange: (checked: boolean) => void;
 };
 
 const ToggleComponent: React.FunctionComponent<ToggleProps> = (props: ToggleProps) => {
-  return <Toggle {...props} onChange={(e) => console.log(e.target.checked)} />;
+  return (
+    <Toggle
+      defaultChecked={props.defaultChecked}
+      onChange={e => props.onChange(e.target.checked)}
+    />
+  );
 };
 
 export default ToggleComponent;

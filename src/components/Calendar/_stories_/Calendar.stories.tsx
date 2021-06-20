@@ -7,8 +7,6 @@ import Calendar from '../Calendar';
 
 const stories = storiesOf('Calendar', module);
 
-// TODO mock context
-
 stories.add('Calendar', () => {
   return <Calendar />;
 });

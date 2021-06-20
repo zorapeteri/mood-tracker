@@ -22,7 +22,7 @@ const HandheldEditName: React.FunctionComponent<HandheldEditNameProps> = (
         padding="1rem 4rem"
         onClick={() => props.save(name)}
       >
-        Next
+        Save
       </Button>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import {
   getLatestMood,
   getUserPreferences,
+  setUserPreferences as saveUserPreferencesToLS,
   deleteMoodLog as deleteMoodLogFromLS,
   saveMoodLog as saveMoodLogToLS,
   saveNote as saveNoteToLS,
@@ -26,6 +27,8 @@ type ContextType = {
   resetCurrentMood: () => void;
   deleteMoodLog: (date: Date, id: string) => void;
   saveMoodLog: (mood: Mood) => void;
+  settingsOpen: boolean;
+  setSettingsOpen: (arg: boolean) => void;
 };
 
 const initialState: ContextType = {
@@ -45,6 +48,8 @@ const initialState: ContextType = {
   resetCurrentMood: () => {},
   deleteMoodLog: (date: Date, id: string) => {},
   saveMoodLog: (mood: Mood) => {},
+  settingsOpen: false,
+  setSettingsOpen: (arg: boolean) => {},
 };
 
 export const Context = createContext<ContextType>(initialState);
@@ -56,6 +61,7 @@ const ContextProvider = (props: { children: any }) => {
   const [moodLog, setMoodLog] = useState<MoodLog[]>([]);
   const [pickingMood, setPickingMood] = useState<boolean>(false);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
   const [userPreferences, setUserPreferences] = useState<UserPreferences | null>(
     getUserPreferences(),
   );
@@ -64,6 +70,10 @@ const ContextProvider = (props: { children: any }) => {
     setMoodLog(getDataForDay(date).moodLog);
     setNotes(getDataForDay(date).notes);
   }, [date]);
+
+  useEffect(() => {
+    if (userPreferences) saveUserPreferencesToLS(userPreferences);
+  }, [userPreferences]);
 
   const resetCurrentMood = () => setCurrentMood(null);
 
@@ -106,6 +116,8 @@ const ContextProvider = (props: { children: any }) => {
         setPickingMood,
         saveMoodLog,
         notes,
+        settingsOpen,
+        setSettingsOpen,
         userPreferences,
         setUserPreferences,
       }}

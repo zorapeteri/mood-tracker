@@ -20,11 +20,12 @@ const DesktopEditName: React.FunctionComponent<DesktopEditNameProps> = (
   return (
     <Modal
       title="What would you like to be called?"
-      buttonText="Next"
+      buttonText="Save"
       onButtonClick={() => {
         props.save(name);
       }}
       disableButton={!name}
+      hideCloseButton={true}
     >
       <TextField placeholder="Your name" rows={1} defaultValue={props.name} onChange={onChange} />
     </Modal>

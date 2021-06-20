@@ -5,13 +5,18 @@ import BREAKPOINTS from '../../breakpoints';
 import HandheldEditName from './HandheldEditName';
 import DesktopEditName from './DesktopEditName';
 
-const EditName: React.FunctionComponent = () => {
+type EditNameProps = {
+  close: () => void;
+};
+
+const EditName: React.FunctionComponent<EditNameProps> = (props: EditNameProps) => {
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
 
   const { userPreferences, setUserPreferences } = useContext(Context);
 
   const save = (name: string) => {
     setUserPreferences({ ...(userPreferences as UserPreferences), name });
+    props.close();
   };
 
   if (breakpoint === 'large') {

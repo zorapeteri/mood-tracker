@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
-import { Context } from '../../context/Context';
+import React from 'react';
 import Button from '../Button';
 import style from './Welcome.module.scss';
 
-const Welcome: React.FunctionComponent = () => {
-  const { setUserPreferences } = useContext(Context);
+type WelcomeProps = {
+  goToNext: () => void;
+};
+
+const Welcome: React.FunctionComponent<WelcomeProps> = (props: WelcomeProps) => {
 
   return (
     <div className={style.welcome}>
@@ -14,7 +16,7 @@ const Welcome: React.FunctionComponent = () => {
         color="primary"
         fontSize="1rem"
         padding="15px 40px"
-        onClick={() => setUserPreferences({ name: '', startsOnSunday: false })}
+        onClick={() => props.goToNext()}
       >
         Get started
       </Button>

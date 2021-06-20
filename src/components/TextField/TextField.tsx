@@ -22,6 +22,11 @@ const TextField: React.FunctionComponent<TextFieldProps> = (props: TextFieldProp
         placeholder={placeholder}
         onChange={e => onChange && setValidationError(onChange(e.target.value))}
         autoFocus={true}
+        onFocus={function (e) {
+          const val = e.target.value;
+          e.target.value = '';
+          e.target.value = val;
+        }}
       />
       {validationError && <small className={style.validationError}>{validationError}</small>}
     </div>
