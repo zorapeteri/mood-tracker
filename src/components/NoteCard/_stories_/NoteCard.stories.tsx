@@ -14,16 +14,24 @@ const longNote =
 
 stories.add('Short note', () => {
   return (
-    <div style={{ paddingLeft: '50px' }}>
-      <NoteCard note={{ id: '1', text: shortNote, time: new Date(), date: new Date() }} onDelete={() => {}} onClick={() => {}} />
+    <div style={{ paddingLeft: '50px', width: '350px' }}>
+      <NoteCard
+        note={{ id: '1', text: shortNote, time: new Date(), date: new Date() }}
+        onDelete={() => {}}
+        onClick={() => {}}
+      />
     </div>
   );
 });
 
 stories.add('Long note', () => {
   return (
-    <div style={{ paddingLeft: '50px' }}>
-      <NoteCard note={{ id: '2', text: longNote, time: new Date(), date: new Date() }} onDelete={() => {}} onClick={() => {}} />
+    <div style={{ paddingLeft: '50px', width: '350px' }}>
+      <NoteCard
+        note={{ id: '2', text: longNote, time: new Date(), date: new Date() }}
+        onDelete={() => {}}
+        onClick={() => {}}
+      />
     </div>
   );
 });

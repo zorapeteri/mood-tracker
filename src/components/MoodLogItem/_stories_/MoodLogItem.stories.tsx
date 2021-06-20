@@ -8,5 +8,9 @@ import MoodLogItem from '../MoodLogItem';
 const stories = storiesOf('MoodLogItem', module);
 
 stories.add('MoodLogItem', () => {
-  return <MoodLogItem id={'1'} mood={1} time={new Date()} onDelete={() => {}} />;
+  return (
+    <div style={{ width: '300px' }}>
+      <MoodLogItem id={'1'} mood={1} time={new Date()} onDelete={() => {}} />
+    </div>
+  );
 });

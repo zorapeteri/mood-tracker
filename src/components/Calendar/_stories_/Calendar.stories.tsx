@@ -8,5 +8,9 @@ import Calendar from '../Calendar';
 const stories = storiesOf('Calendar', module);
 
 stories.add('Calendar', () => {
-  return <Calendar />;
+  return (
+    <div style={{ width: '300px' }}>
+      <Calendar />
+    </div>
+  );
 });
