@@ -1,5 +1,4 @@
 import React from 'react';
-import { StringMappingType } from 'typescript';
 import Button from '../Button';
 import style from './Confirm.module.scss';
 

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { Context } from '../../context/Context';
+import React, { useState } from 'react';
 import useBreakpoint from 'use-breakpoint';
 import BREAKPOINTS from '../../breakpoints';
 import Confirm from '../Confirm';
