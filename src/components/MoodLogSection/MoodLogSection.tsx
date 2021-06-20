@@ -22,9 +22,13 @@ const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: Moo
       <h2>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
       <ol>
         {moodLog.length ? (
-          moodLog.map((log: MoodLog) => <MoodLogItem {...log} key={log.id} onDelete={(id) => onDelete(log.id)} />)
+          moodLog.map((log: MoodLog) => (
+            <MoodLogItem {...log} key={log.id} onDelete={id => onDelete(log.id)} />
+          ))
         ) : (
-          <NothingHere />
+          <li>
+            <NothingHere />
+          </li>
         )}
       </ol>
     </section>

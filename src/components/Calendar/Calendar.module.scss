@@ -1,5 +1,7 @@
 @import '../../scss/variables.scss';
 
+$color-notThisMonth: #3a5e64;
+
 .calendar {
   background-color: $color-white;
   padding: 20px 20px 45px;
@@ -66,7 +68,7 @@
     }
 
     .notThisMonth {
-      color: $color-shade;
+      color: $color-notThisMonth;
 
       &:hover {
         background-color: $color-shade;

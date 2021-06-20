@@ -2,20 +2,25 @@
 
 $font-ibm: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-$color-accent: #0880ae;
+$color-accent: #005c86;
 $color-warning: #f2ac57;
 $color-success: #14a38b;
 $color-error: #ff7171;
 $color-primary: #2c2738;
 $color-secondary: #756f86;
-$color-muted: #7c9cbf;
+$color-muted: #3d5b7d;
 $color-almost-white: #f8f7f7;
 $color-white: #fff;
 $color-shade: #dbe2ea;
 $color-tint: #ebf4f8;
 $color-background: #ebf4f8;
-$color-pastel-purple: #a6bbda;
 
 $small: (max-width: 659px);
 $medium: '(min-width: 660px) and (max-width: 890px)';
 $large: (min-width: 891px);
+
+@keyframes bump {
+  50% {
+    transform: scale(1.01);
+  }
+}

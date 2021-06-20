@@ -41,7 +41,9 @@ const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSe
             />
           ))
         ) : (
-          <NothingHere />
+          <li>
+            <NothingHere />
+          </li>
         )}
       </ol>
     </section>

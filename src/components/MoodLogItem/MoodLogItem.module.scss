@@ -1,8 +1,8 @@
 @import '../../scss/variables.scss';
 
 .moodLogItem {
-  background-color: $color-pastel-purple;
-  color: $color-almost-white;
+  background-color: $color-almost-white;
+  color: $color-primary;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,6 +10,7 @@
   padding: 12px 22px;
   border-radius: 22px;
   font-weight: 600;
+  box-shadow: 0px 32px 64px #2C273814;
   transition: all 0.2s linear;
 
   img {
@@ -21,7 +22,7 @@
   }
 
   &:hover {
-    background-color: darken($color-pastel-purple, 10%);
+    transform: scale(1.01);
 
     @media #{$large} {
       .desktopDeleteButton {
@@ -39,14 +40,7 @@
   @media #{$small, $medium} {
     &.longPressed {
       animation: bump 0.2s ease-in-out;
-      background-color: $color-pastel-purple;
       overflow: hidden;
     }
-  }
-}
-
-@keyframes bump {
-  50% {
-    transform: scale(1.01);
   }
 }
