@@ -31,7 +31,7 @@ type ContextType = {
   setSettingsOpen: (arg: boolean) => void;
 };
 
-const initialState: ContextType = {
+export const initialState: ContextType = {
   date: new Date(),
   currentMood: null,
   editingNote: null,
