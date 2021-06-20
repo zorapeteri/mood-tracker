@@ -61,16 +61,18 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
   useEffect(() => {
     if (!isSameMonth(date, month)) setMonth(startOfMonth(date));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]); // TODO do we need this here?
+  }, [date]);
 
   const days = Array(getDaysInMonth(month))
     .fill(1)
     .map((x, y) => x + y)
-    .map((day) => new Date(month.getFullYear(), month.getMonth(), day));
+    .map(day => new Date(month.getFullYear(), month.getMonth(), day));
 
   const startsOnSunday = userPreferences?.startsOnSunday || false;
 
-  const daysOfTheWeek = startsOnSunday ? ['S', 'M', 'T', 'W', 'T', 'F', 'S'] : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const daysOfTheWeek = startsOnSunday
+    ? ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+    : ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   return (
     <div className={`${style.calendar} ${className}`}>
@@ -78,7 +80,12 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
         <button title="previous month" onClick={() => onMonthViewChange(-1)}>
           <IoChevronBack />
         </button>
-        <span>{month.toLocaleString('en-en', { month: 'long', year: isThisYear(month) ? undefined : 'numeric' })}</span>
+        <span>
+          {month.toLocaleString('en-en', {
+            month: 'long',
+            year: isThisYear(month) ? undefined : 'numeric',
+          })}
+        </span>
         <button title="next month" onClick={() => onMonthViewChange(1)}>
           <IoChevronForward />
         </button>
@@ -89,20 +96,23 @@ const Calendar: React.FunctionComponent<CalendarProps> = (props: CalendarProps) 
         ))}
       </div>
       <div className={style.days}>
-        {getDaysNeededFromPreviousMonth(month, startsOnSunday).map((day) => (
+        {getDaysNeededFromPreviousMonth(month, startsOnSunday).map(day => (
           <button key={day.toString()} className={style.notThisMonth} onClick={() => setDate(day)}>
             {day.getDate()}
           </button>
         ))}
-        {days.map((day) => {
-          const className = [isSameDay(date, day) && style.selected, isToday(day) && style.today].join(' ');
+        {days.map(day => {
+          const className = [
+            isSameDay(date, day) && style.selected,
+            isToday(day) && style.today,
+          ].join(' ');
           return (
             <button key={day.toString()} className={className} onClick={() => setDate(day)}>
               {day.getDate()}
             </button>
           );
         })}
-        {getDaysNeededFromNextMonth(month, startsOnSunday).map((day) => (
+        {getDaysNeededFromNextMonth(month, startsOnSunday).map(day => (
           <button key={day.toString()} className={style.notThisMonth} onClick={() => setDate(day)}>
             {day.getDate()}
           </button>
