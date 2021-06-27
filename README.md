@@ -10,3 +10,7 @@ Features:
 
 <br>
 <img width="1000" src="https://images2.imgbox.com/30/75/IVIHNv8M_o.png"/>
+
+### lighthouse report
+
+<img width="500" src="https://i.ibb.co/jH36P1F/mood-tracker-lighthouse.png" alt="100 lighthouse score">
