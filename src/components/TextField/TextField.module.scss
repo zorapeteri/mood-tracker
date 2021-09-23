@@ -24,4 +24,13 @@
     color: $color-error;
     margin-left: 10px;
   }
+
+  &.tall {
+    @media #{$small} {
+      textarea {
+        height: 65vh;
+        max-height: 500px;
+      }
+    }
+  }
 }
