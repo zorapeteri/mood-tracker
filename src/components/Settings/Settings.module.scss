@@ -1,13 +1,12 @@
-@import '../../../scss/variables.scss';
+@import '../../scss/variables.scss';
 
-.desktopSettings {
+.settings {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   padding: 20px 10px;
 
   button {
-    grid-column: 1;
     outline: none;
     box-shadow: none;
     display: flex;
@@ -23,6 +22,8 @@
     }
 
     &:not(.sundayButton)  {
+      grid-column: 1 / 3;
+
       &:hover, &:focus-visible {
         background-color: $color-tint;
       }
@@ -30,6 +31,7 @@
 
     &.sundayButton {
       cursor: auto;
+      grid-column: 1;
     }
     
   }
@@ -39,5 +41,9 @@
     grid-row: 2;
     display: flex;
     align-items: center;
+  }
+
+  @media #{$small} {
+    grid-template-columns: 1fr auto;
   }
 }

@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
-import useBreakpoint from 'use-breakpoint';
-import BREAKPOINTS from '../../breakpoints';
+import React, { useContext, useState } from 'react';
+import { IoBuild, IoCalendarOutline, IoPerson } from 'react-icons/io5';
+import { Context } from '../../context/Context';
 import Confirm from '../Confirm';
-import DesktopSettings from './DesktopSettings';
-import HandheldSettings from './HandheldSettings';
+import Modal from '../Modal';
+import Toggle from '../Toggle';
+import style from './Settings.module.scss';
 
 type SettingsProps = {
   editName: () => void;
 };
 
-const Settings: React.FunctionComponent<SettingsProps> = (props: SettingsProps) => {
-  const { breakpoint } = useBreakpoint(BREAKPOINTS);
+const Settings: React.FunctionComponent<SettingsProps> = (
+  props: SettingsProps
+) => {
+  const { userPreferences, setUserPreferences, setSettingsOpen } = useContext(
+    Context
+  );
 
   const [confirm, setConfirm] = useState<boolean>(false);
 
@@ -31,11 +36,46 @@ const Settings: React.FunctionComponent<SettingsProps> = (props: SettingsProps) 
           onNo={() => setConfirm(false)}
         />
       )}
-      {breakpoint === 'large' ? (
-        <DesktopSettings {...props} openResetConfirm={() => setConfirm(true)} />
-      ) : (
-        <HandheldSettings {...props} openResetConfirm={() => setConfirm(true)} />
-      )}
+      <Modal
+        title="Settings"
+        hideButton={true}
+        showOverlayShade={true}
+        onClose={() => setSettingsOpen(false)}
+      >
+        <div className={style.settings}>
+          <button onClick={() => props.editName()}>
+            <span className={style.icon}>
+              <IoPerson />
+            </span>
+            <span>Change your name</span>
+          </button>
+          <button className={style.sundayButton}>
+            <span className={style.icon}>
+              <IoCalendarOutline />
+            </span>
+            <span>Week starts on Sunday</span>
+          </button>
+          <button onClick={() => setConfirm(true)}>
+            <span className={style.icon}>
+              <IoBuild />
+            </span>
+            <span>Reset all data</span>
+          </button>
+          <div className={style.toggleContainer}>
+            <Toggle
+              defaultChecked={
+                userPreferences !== null && userPreferences.startsOnSunday
+              }
+              onChange={(checked) =>
+                setUserPreferences({
+                  ...(userPreferences as UserPreferences),
+                  startsOnSunday: checked,
+                })
+              }
+            />
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
