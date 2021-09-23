@@ -9,6 +9,7 @@
   display: grid;
   place-items: center;
   z-index: 2;
+  padding: 1rem;
 
   &.shade {
     background-color: rgba($color-background, 0.8);
@@ -17,7 +18,8 @@
 
 .modal {
   background-color: $color-white;
-  width: 550px;
+  width: 100%;
+  max-width: 550px;
   height: fit-content;
   border-radius: 8px;
   box-shadow: 0px 32px 64px #2C273814;
@@ -52,5 +54,9 @@
     &:hover {
       opacity: 0.5;
     }
+  }
+
+  @media #{$small} {
+    padding: 1rem;
   }
 }
