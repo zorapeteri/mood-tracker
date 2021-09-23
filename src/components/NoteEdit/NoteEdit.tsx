@@ -1,31 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from '../../context/Context';
-import useBreakpoint from 'use-breakpoint';
-import BREAKPOINTS from '../../breakpoints';
-import DesktopNoteEdit from './DesktopNoteEdit';
-import HandheldNoteEdit from './HandheldNoteEdit';
+import Modal from '../Modal';
+import TextField from '../TextField';
 
 const NoteEdit: React.FunctionComponent = () => {
-  const { breakpoint } = useBreakpoint(BREAKPOINTS);
 
   const { editingNote, setEditingNote, saveNote } = useContext(Context);
 
-  if (breakpoint === 'large') {
-    return (
-      <DesktopNoteEdit
-        note={editingNote as Note}
-        close={() => setEditingNote(null)}
-        saveNote={(note: Note) => saveNote(note)}
-      />
-    );
-  }
+  const [note, setNote] = useState<Note>(editingNote as Note);
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const onChange = (text: string) => {
+    if (!text) {
+      setDisabled(true);
+      return 'You cannot save an empty note';
+    }
+    setDisabled(false);
+    setNote({ ...note, time: new Date(), text });
+    return true;
+  };
+
+  const close = () => setEditingNote(null);
 
   return (
-    <HandheldNoteEdit
-      note={editingNote as Note}
-      close={() => setEditingNote(null)}
-      saveNote={(note: Note) => saveNote(note)}
-    />
+    <Modal
+      title="Note"
+      buttonText="Save"
+      onButtonClick={() => {
+        saveNote(note);
+        close();
+      }}
+      onClose={() => close()}
+      disableButton={disabled}
+      showOverlayShade={true}
+    >
+      <TextField
+        defaultValue={note.text}
+        placeholder="Start typing your note..."
+        rows={4}
+        onChange={text => onChange(text)}
+        tall
+      />
+    </Modal>
   );
 };
 
