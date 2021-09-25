@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
 import { Context } from '../../context/Context';
-import { isToday } from 'date-fns';
 import MoodLogItem from '../MoodLogItem';
 import NothingHere from '../NothingHere';
+import TodayText from '../TodayText';
 
 type MoodLogSectionProps = {
   className?: string;
 };
 
-const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: MoodLogSectionProps) => {
+const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (
+  props: MoodLogSectionProps
+) => {
   const { className } = props;
 
   const { date, moodLog, deleteMoodLog } = useContext(Context);
@@ -19,11 +21,17 @@ const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: Moo
 
   return (
     <section className={className}>
-      <h2>{isToday(date) ? "Today's mood log" : 'Mood log'}</h2>
+      <h2>
+        <TodayText date={date} today="Today's mood log" notToday="Mood log" />
+      </h2>
       <ol>
         {moodLog.length ? (
           moodLog.map((log: MoodLog) => (
-            <MoodLogItem {...log} key={log.id} onDelete={id => onDelete(log.id)} />
+            <MoodLogItem
+              {...log}
+              key={log.id}
+              onDelete={(id) => onDelete(log.id)}
+            />
           ))
         ) : (
           <li>

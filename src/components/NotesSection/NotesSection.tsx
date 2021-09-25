@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../../context/Context';
-import { isToday } from 'date-fns';
+import TodayText from '../TodayText';
 import { IoAdd } from 'react-icons/io5';
 import Button from '../Button';
 import NoteCard from '../NoteCard';
@@ -10,7 +10,9 @@ type NotesSectionProps = {
   className?: string;
 };
 
-const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSectionProps) => {
+const NotesSection: React.FunctionComponent<NotesSectionProps> = (
+  props: NotesSectionProps
+) => {
   const { className } = props;
 
   const { date, notes, setEditingNote, deleteNote } = useContext(Context);
@@ -18,14 +20,16 @@ const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSe
   return (
     <section className={className}>
       <h2>
-        {isToday(date) ? 'Notes for today' : 'Notes'}
+        <TodayText date={date} today="Notes for today" notToday="Notes" />
         <Button
           color="secondary"
           circular={true}
           fontSize="20px"
           padding="0"
           title="create new note"
-          onClick={() => setEditingNote({ id: '', time: new Date(), date, text: '' })}
+          onClick={() =>
+            setEditingNote({ id: '', time: new Date(), date, text: '' })
+          }
         >
           <IoAdd />
         </Button>
