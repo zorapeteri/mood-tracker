@@ -6,18 +6,23 @@ type DesktopDeleteItemButtonProps = {
   title: string;
   onDelete: () => void;
   side: 'left' | 'right';
-  className: string;
+  className?: string;
 };
 
-const DesktopDeleteItemButton: React.FunctionComponent<DesktopDeleteItemButtonProps> = (props: DesktopDeleteItemButtonProps) => {
+const DesktopDeleteItemButton: React.FunctionComponent<DesktopDeleteItemButtonProps> = (
+  props: DesktopDeleteItemButtonProps
+) => {
   const { title, onDelete, side, className } = props;
 
   return (
-    <div className={`${style.desktopDeleteButtonContainer} ${className} ${style[side]}`}>
+    <div
+      className={`${style.desktopDeleteButtonContainer} ${className} ${style[side]}`}
+      data-testid="desktop-delete"
+    >
       <button
         className={style.desktopDeleteButton}
         title={title}
-        onClick={e => {
+        onClick={(e) => {
           e.stopPropagation();
           onDelete();
         }}

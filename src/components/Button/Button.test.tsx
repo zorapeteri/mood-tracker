@@ -40,9 +40,15 @@ describe('Button', () => {
 
   it('should have the correct class', () => {
     render(
-      <Button color="primary" fontSize="1em" padding="1em" onClick={onClick}>
+      <Button
+        color="primary"
+        fontSize="1em"
+        padding="1em"
+        onClick={onClick}
+        circular
+      >
         {testButtonContent}
-      </Button>,
+      </Button>
     );
 
     expect(screen.getByText(testButtonContent)).toHaveClass('primary');

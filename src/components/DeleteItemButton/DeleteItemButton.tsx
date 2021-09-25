@@ -7,7 +7,7 @@ type DeleteItemButtonProps = {
   title: string;
   onDelete: () => void;
   side: 'left' | 'right';
-  className: string;
+  className?: string;
 };
 
 const DeleteItemButton: React.FunctionComponent<DeleteItemButtonProps> = (props: DeleteItemButtonProps) => {

@@ -12,9 +12,13 @@ const HandheldDeleteItemButton: React.FunctionComponent<HandheldDeleteItemButton
   const { title, onDelete } = props;
 
   return (
-    <div className={style.handheldDeleteOverlay}>
+    <div className={style.handheldDeleteOverlay} data-testid="handheld-delete">
       <div className={style.handheldDeleteOverlayBlock}></div>
-      <button className={style.handheldDeleteButton} title={title} onClick={() => onDelete()}>
+      <button
+        className={style.handheldDeleteButton}
+        title={title}
+        onClick={() => onDelete()}
+      >
         <IoClose />
       </button>
     </div>

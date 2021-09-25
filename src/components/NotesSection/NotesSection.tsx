@@ -7,7 +7,7 @@ import NoteCard from '../NoteCard';
 import NothingHere from '../NothingHere';
 
 type NotesSectionProps = {
-  className: string;
+  className?: string;
 };
 
 const NotesSection: React.FunctionComponent<NotesSectionProps> = (props: NotesSectionProps) => {
