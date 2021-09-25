@@ -5,7 +5,7 @@ import MoodLogItem from '../MoodLogItem';
 import NothingHere from '../NothingHere';
 
 type MoodLogSectionProps = {
-  className: string;
+  className?: string;
 };
 
 const MoodLogSection: React.FunctionComponent<MoodLogSectionProps> = (props: MoodLogSectionProps) => {
