@@ -21,7 +21,7 @@ describe('TextField', () => {
   });
 
   it('should display validation error', () => {
-    render(<TextField {...props} />);
+    render(<TextField {...props} tall />);
 
     userEvent.type(screen.getByRole('textbox'), 'hi');
     screen.getByText('test validation error');
