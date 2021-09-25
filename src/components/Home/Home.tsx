@@ -14,14 +14,21 @@ import useBreakpoint from 'use-breakpoint';
 import BREAKPOINTS from '../../breakpoints';
 
 const Home: React.FunctionComponent = () => {
-  const { date, setDate, currentMood, setSettingsOpen } = useContext(Context);
+  const {
+    date,
+    setDate,
+    currentMood,
+    setSettingsOpen,
+    setPickingMood,
+  } = useContext(Context);
 
   const [activeView, setActiveView] = useState<'today' | 'calendar'>('today');
 
   const { breakpoint } = useBreakpoint(BREAKPOINTS);
 
   useEffect(() => {
-    if (breakpoint !== 'large' && activeView === 'today' && !isToday(date)) setDate(new Date());
+    if (breakpoint !== 'large' && activeView === 'today' && !isToday(date))
+      setDate(new Date());
   }, [activeView, date, setDate, breakpoint]);
 
   return (
@@ -36,13 +43,16 @@ const Home: React.FunctionComponent = () => {
       <Greeting />
       <ViewToggle
         activeToggle={activeView}
-        onChange={option => setActiveView(option)}
+        onChange={(option) => setActiveView(option)}
         className={style.viewToggle}
       />
       {currentMood ? (
         <CurrentMoodCard className={style.currentMoodCard} />
       ) : (
-        <RecordYourMoodButton className={style.recordYourMoodButton} />
+        <RecordYourMoodButton
+          className={style.recordYourMoodButton}
+          setPickingMood={setPickingMood}
+        />
       )}
       <Calendar className={style.calendar} />
       <MoodLogSection className={style.moodLog} />
