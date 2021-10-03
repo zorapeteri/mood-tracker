@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import style from './NoteCard.module.scss';
-import useLongPress from '../../hooks/useLongPress';
+import { useLongPress } from 'use-long-press';
 
 import ClampLines from 'react-clamp-lines';
 
@@ -14,7 +14,9 @@ type NoteCardProps = {
   onClick: () => void;
 };
 
-const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) => {
+const NoteCard: React.FunctionComponent<NoteCardProps> = (
+  props: NoteCardProps
+) => {
   const { note, onDelete, width, onClick } = props;
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
@@ -29,14 +31,12 @@ const NoteCard: React.FunctionComponent<NoteCardProps> = (props: NoteCardProps) 
       }
     };
     document.addEventListener('click', listener);
-  }
-
-  const longPress = {
-    ...useLongPress(() => {
-      setLongPressed(true);
-      setupListener();
-    }),
   };
+
+  const longPress = useLongPress(() => {
+    setLongPressed(true);
+    setupListener();
+  });
 
   return (
     <li

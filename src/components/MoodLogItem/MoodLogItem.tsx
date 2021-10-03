@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import style from './MoodLogItem.module.scss';
 import moodNames from '../../moodNames';
-import useLongPress from '../../hooks/useLongPress';
+import { useLongPress } from 'use-long-press';
 
 import { format } from 'date-fns';
 import DeleteItemButton from '../DeleteItemButton';
@@ -14,7 +14,9 @@ type MoodLogItemProps = {
   className?: string;
 };
 
-const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogItemProps) => {
+const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (
+  props: MoodLogItemProps
+) => {
   const { id, mood, time, onDelete, className } = props;
 
   const [isLongPressed, setLongPressed] = useState<boolean>(false);
@@ -29,13 +31,25 @@ const MoodLogItem: React.FunctionComponent<MoodLogItemProps> = (props: MoodLogIt
       }
     };
     document.addEventListener('click', listener);
-  }
+  };
 
-  const longPress = { ...useLongPress(() => { setLongPressed(true); setupListener(); }) };
+  const longPress = useLongPress(() => {
+    setLongPressed(true);
+    setupListener();
+  });
 
   return (
-    <li className={`${style.moodLogItem} ${isLongPressed && style.longPressed} ${className}`} {...longPress} ref={ref}>
-      <img src={`${process.env.PUBLIC_URL}/assets/moods/${mood}.png`} alt={`${moodNames[mood]} mood emoji icon`} />
+    <li
+      className={`${style.moodLogItem} ${
+        isLongPressed && style.longPressed
+      } ${className}`}
+      {...longPress}
+      ref={ref}
+    >
+      <img
+        src={`${process.env.PUBLIC_URL}/assets/moods/${mood}.png`}
+        alt={`${moodNames[mood]} mood emoji icon`}
+      />
       <span>{format(time, 'hh:mm a')}</span>
       <DeleteItemButton
         isLongPressed={isLongPressed}
