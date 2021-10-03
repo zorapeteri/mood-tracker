@@ -19,7 +19,7 @@ describe('CurrentMoodCard', () => {
         <CurrentMoodCard />
       </MockContext>
     );
-    screen.getByText(moodNames[extendMockContext.currentMood]);
+    screen.getByText(moodNames[extendMockContext.currentMood as Mood]);
   });
 
   it('should call setPickingMood from context', () => {
